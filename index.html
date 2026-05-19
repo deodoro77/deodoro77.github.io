@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turma Marechal Deodoro · EsPCEx 1977/1979</title>
+<meta name="description" content="Site da Turma Marechal Deodoro da Fonseca - Escola Preparatória de Cadetes do Exército, 1977/1979. Memória permanente da turma e Encontro de 50 Anos.">
+<link rel="icon" type="image/webp" href="assets/img/logo.webp">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilo.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="brand" onclick="nav('inicio')">
+      <img src="assets/img/logo.webp" alt="EsPCEx" class="brand-logo">
+      <div class="brand-text">Turma Marechal Deodoro<small>EsPCEx · 1977 / 1979</small></div>
+    </div>
+    <div class="nav1">
+      <button class="nav1-item active" data-nav="inicio" onclick="nav('inicio')">Início</button>
+      <button class="nav1-item" data-nav="encontros" onclick="nav('encontros')">Encontros</button>
+      <button class="nav1-item" data-nav="historia" onclick="nav('historia')">História</button>
+      <button class="nav1-item" data-nav="galeria" onclick="nav('galeria')">Galeria</button>
+      <button class="nav1-item" data-nav="memoriam" onclick="nav('memoriam')">In Memoriam</button>
+      <button class="nav1-item login-btn" id="loginNavBtn" data-nav="login" onclick="nav('login')">Entrar</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== INÍCIO ===================== -->
+<section class="screen active" id="scr-inicio">
+  <div class="event-banner" id="eventBanner" onclick="goEncontro()">
+    <div class="event-banner-inner">
+      <div class="event-banner-left">
+        <span class="event-banner-badge">Evento ativo</span>
+        <div class="event-banner-text">
+          <h3>Encontro 50 Anos da Entrada · 1977–2027</h3>
+          <p>Inscrições abertas — celebre meio século de história com a turma</p>
+        </div>
+      </div>
+      <button class="event-banner-cta">Ver o encontro</button>
+    </div>
+  </div>
+  <div class="home-hero">
+    <div class="home-hero-inner">
+      <img src="assets/img/logo.webp" alt="Brasão" class="home-hero-logo">
+      <div>
+        <h1>Turma Marechal Deodoro da Fonseca</h1>
+        <div class="tagline">Escola Preparatória de Cadetes do Exército · 1977 / 1979</div>
+        <div class="lead">Meio século de amizade, história e tradição. Este é o espaço permanente da nossa turma — memória viva de quem cruzou o portão da Prep e seguiu junto pela vida.</div>
+        <div class="motto-inline"><span>★</span> HONRA <span>★</span> DEVER <span>★</span> PÁTRIA <span>★</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="home-body">
+    <div class="section-eyebrow">Nosso espaço</div>
+    <h2 class="section-title">Um lugar para a nossa história</h2>
+    <div class="section-text">
+      <p>Este site é a casa digital da Turma Marechal Deodoro. Aqui guardamos a memória dos nossos encontros, as fotografias, as histórias e a lembrança dos companheiros que partiram.</p>
+      <p>O conteúdo principal — história da turma, galeria, registros — será construído aos poucos, com a colaboração de todos. Por enquanto, o destaque é o nosso próximo grande momento: o Encontro de 50 Anos.</p>
+    </div>
+    <div class="nav-cards">
+      <div class="nav-card" onclick="nav('encontros')">
+        <span class="ico">📅</span><h3>Encontros</h3>
+        <p>Nossos reencontros ao longo dos anos. O próximo: 50 anos da entrada, em 2027.</p>
+        <span class="tag">Evento ativo →</span>
+      </div>
+      <div class="nav-card" onclick="nav('historia')">
+        <span class="ico">📜</span><h3>História</h3>
+        <p>A trajetória da turma desde 1977 — da Prep à vida que se seguiu.</p>
+        <span class="tag">Em breve</span>
+      </div>
+      <div class="nav-card" onclick="nav('memoriam')">
+        <span class="ico">🕯️</span><h3>In Memoriam</h3>
+        <p>Homenagem permanente aos companheiros que já nos deixaram.</p>
+        <span class="tag">Em breve</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ENCONTROS ===================== -->
+<section class="screen" id="scr-encontros">
+  <div class="enc-header">
+    <h1>Encontros da Turma</h1>
+    <p>Cada reencontro, um capítulo da nossa história</p>
+  </div>
+  <div class="subnav">
+    <div class="subnav-inner">
+      <button class="subnav-item active" onclick="subEnc(this,'ev50')">50 Anos · 1977–2027</button>
+      <button class="subnav-item locked" title="A documentar">45 Anos · 2022</button>
+      <button class="subnav-item locked" title="A documentar">Anteriores</button>
+    </div>
+  </div>
+  <div class="enc-screen active" id="ev50">
+    <div class="subnav" style="position:relative;top:auto;background:var(--olive)">
+      <div class="subnav-inner">
+        <button class="subnav-item active" onclick="evScr(this,'landing')">Apresentação</button>
+        <button class="subnav-item" onclick="evScr(this,'inscricao')">Inscrição</button>
+        <button class="subnav-item" onclick="evScr(this,'conta')">Minha Conta</button>
+        <button class="subnav-item" onclick="evScr(this,'admin')">Admin</button>
+        <button class="subnav-item" onclick="evScr(this,'dashboard')">Dashboard</button>
+      </div>
+    </div>
+
+    <!-- LANDING -->
+    <div class="enc-screen active" id="evs-landing">
+      <div class="ev-hero">
+        <div class="ev-hero-inner">
+          <img src="assets/img/logo.webp" class="ev-hero-logo" alt="Brasão 50 anos">
+          <div>
+            <h2><span class="accent">É com grande alegria que convidamos você para o</span>Encontro 50 Anos da Entrada</h2>
+            <div class="ev-sub">Turma Marechal Deodoro da Fonseca · 1977–2027</div>
+            <div class="ev-meta">
+              <div class="ev-meta-item"><div class="l">Datas</div><div class="v">26 e 27 · Fev · 2027</div></div>
+              <div class="ev-meta-item"><div class="l">Local</div><div class="v">Campinas — SP</div></div>
+            </div>
+            <button class="ev-cta" onclick="evScr(document.querySelectorAll('#ev50 .subnav')[1].querySelectorAll('.subnav-item')[1],'inscricao')">Quero me inscrever</button>
+          </div>
+        </div>
+      </div>
+      <div class="ev-motto">HONRA <span>★</span> DEVER <span>★</span> PÁTRIA</div>
+      <div class="ev-body">
+        <div class="countdown-wrap">
+          <div class="countdown-label">Faltam para o pré-encontro · 26 de fevereiro de 2027</div>
+          <div class="countdown">
+            <div class="cd-block"><div class="n" id="cd-d">—</div><div class="l">dias</div></div>
+            <div class="cd-block"><div class="n" id="cd-h">—</div><div class="l">horas</div></div>
+            <div class="cd-block"><div class="n" id="cd-m">—</div><div class="l">minutos</div></div>
+            <div class="cd-block"><div class="n" id="cd-s">—</div><div class="l">segundos</div></div>
+          </div>
+          <div class="countdown-target">Sexta-feira · pré-encontro · 20h</div>
+        </div>
+        <div class="section-eyebrow">Nossa história</div>
+        <h2 class="section-title">Cinco décadas depois</h2>
+        <div class="section-text">
+          <p>Em 1977 cruzamos pela primeira vez o portão da Escola Preparatória de Cadetes do Exército. Cinquenta anos depois, voltaremos à nossa querida escola — agora com famílias, histórias e a certeza de que a amizade resistiu ao tempo.</p>
+          <p>Este encontro é a oportunidade de revisitar memórias, abraçar os companheiros de farda, lembrar dos que partiram e brindar aos cinquenta anos que nos uniram para sempre.</p>
+        </div>
+        <div style="margin-top:46px"></div>
+        <div class="section-eyebrow">Programação</div>
+        <h2 class="section-title">Dois dias inesquecíveis</h2>
+        <div class="program">
+          <div class="prog-card"><div class="d">Sexta · 26.Fev</div><h3>Pré-Encontro</h3><p>Confraternização informal, jantar e reencontros com companheiros que chegam de tantos locais diferentes.</p></div>
+          <div class="prog-card"><div class="d">Sábado · 27.Fev · Manhã</div><h3>Cerimônia oficial</h3><p>Welcome coffee, entrada pelo portão, homenagem aos que partiram, palavras do orador e fotos.</p></div>
+          <div class="prog-card"><div class="d">Sábado · 27.Fev · Tarde</div><h3>Casa de Barcos</h3><p>Almoço de confraternização com churrasco, música ao vivo e celebração com famílias.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSCRIÇÃO -->
+    <div class="enc-screen" id="evs-inscricao">
+      <div class="insc-wrap" id="inscContent"></div>
+    </div>
+
+    <!-- MINHA CONTA -->
+    <div class="enc-screen" id="evs-conta">
+      <div class="acct-wrap" id="contaContent"></div>
+    </div>
+
+    <!-- ADMIN -->
+    <div class="enc-screen" id="evs-admin">
+      <div class="admin-wrap" id="adminContent"></div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="enc-screen" id="evs-dashboard">
+      <div class="dash-wrap" id="dashContent"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HISTÓRIA ===================== -->
+<section class="screen" id="scr-historia">
+  <div class="placeholder-wrap">
+    <div class="placeholder-ico">📜</div>
+    <h2>História da Turma</h2>
+    <div class="sub">Esta seção guardará a trajetória da Turma Marechal Deodoro, de 1977 até hoje.</div>
+    <div class="placeholder-box">
+      <strong>Conteúdo planejado</strong>
+      Espaço em construção. Aqui reuniremos a memória escrita da turma.
+      <ul class="placeholder-list">
+        <li>A entrada na Prep em 1977 e os anos de formação</li>
+        <li>Trajetórias e carreiras dos integrantes</li>
+        <li>Documentos e boletins históricos da época</li>
+        <li>Depoimentos e relatos dos companheiros</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GALERIA ===================== -->
+<section class="screen" id="scr-galeria">
+  <div class="home-body">
+    <div class="section-eyebrow">Acervo da turma</div>
+    <h2 class="section-title">Galeria & Memória Visual</h2>
+    <div class="section-text">
+      <p>O acervo de fotografias e registros da turma, dos tempos de cadete aos dias atuais. Começamos por um tesouro: o anuário de 1979.</p>
+    </div>
+    <div class="nav-cards" style="margin-top:44px">
+      <div class="nav-card" onclick="window.open('revista/','_blank')" style="border-top-color:var(--wine)">
+        <span class="ico">📖</span>
+        <h3>The Face Book · 1979</h3>
+        <p>O anuário histórico da turma, da capa com a placa dos formandos à última página. 108 páginas digitalizadas, folheáveis.</p>
+        <span class="tag" style="color:var(--wine)">Abrir a revista →</span>
+      </div>
+      <div class="nav-card" style="opacity:.6;cursor:default">
+        <span class="ico">📷</span>
+        <h3>Encontros anteriores</h3>
+        <p>Registros fotográficos dos reencontros da turma ao longo das décadas.</p>
+        <span class="tag">Em breve</span>
+      </div>
+      <div class="nav-card" style="opacity:.6;cursor:default">
+        <span class="ico">🎥</span>
+        <h3>Encontro 50 Anos</h3>
+        <p>O álbum e os vídeos do nosso grande reencontro — disponível após fevereiro de 2027.</p>
+        <span class="tag">Após o evento</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== IN MEMORIAM ===================== -->
+<section class="screen" id="scr-memoriam">
+  <div class="placeholder-wrap">
+    <div class="placeholder-ico">🕯️</div>
+    <h2>In Memoriam</h2>
+    <div class="sub">Homenagem permanente aos companheiros que já nos deixaram. Que sua memória nos acompanhe sempre.</div>
+    <div class="placeholder-box">
+      <strong>Conteúdo planejado</strong>
+      Espaço em construção, a ser preenchido com cuidado e respeito.
+      <ul class="placeholder-list">
+        <li>Relação dos companheiros falecidos (a partir do cadastro da turma)</li>
+        <li>Memórias e homenagens individuais</li>
+        <li>Momento de silêncio simbólico no Encontro de 50 Anos</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LOGIN ===================== -->
+<section class="screen" id="scr-login">
+  <div class="login-wrap">
+    <div class="login-card" id="loginCard">
+      <img src="assets/img/logo.webp" class="login-logo" alt="Brasão">
+      <h2>Área do Integrante</h2>
+      <div class="login-sub">Acesso exclusivo aos integrantes da turma</div>
+      <div class="login-error" id="loginError">Este e-mail ou telefone não consta no cadastro da turma. O acesso é restrito aos integrantes.</div>
+      <div class="login-field">
+        <label>E-mail ou telefone</label>
+        <input type="text" id="loginUser" placeholder="seu@email.com ou (11) 99999-9999">
+      </div>
+      <div class="login-field">
+        <label>Senha</label>
+        <input type="password" id="loginPass" placeholder="sua senha">
+      </div>
+      <button class="login-btn-main" onclick="doLogin()">Entrar</button>
+      <div class="login-divider"><span>ou</span></div>
+      <div class="login-alt" onclick="alert('No protótipo, use um dos perfis de teste abaixo. Na versão final, aqui o integrante cria a senha — validado contra o cadastro da turma.')">Primeiro acesso? Criar minha senha</div>
+      <div class="login-note">
+        <strong>ACESSO RESTRITO</strong><br>
+        Somente integrantes da Turma Marechal Deodoro podem criar acesso. O cadastro é validado automaticamente — pessoas de fora não conseguem entrar. O site é livre para visitação; o login serve para a área do integrante.
+      </div>
+      <div class="test-users">
+        <div class="tu-title">Perfis de teste (comissão organizadora)</div>
+        <div class="tu-grid"><button class="tu-chip" onclick="fillLogin('riva.cerqueira@gmail.com')">Rivail</button><button class="tu-chip" onclick="fillLogin('andre.novaes63@gmail.com')">André Novaes</button><button class="tu-chip" onclick="fillLogin('baggio@exemplo.com')">Baggio</button><button class="tu-chip" onclick="fillLogin('newtonraulino@hotmail.com')">Raulino</button><button class="tu-chip" onclick="fillLogin('everton@exemplo.com')">Everton</button><button class="tu-chip" onclick="fillLogin('guy@exemplo.com')">Guy</button><button class="tu-chip" onclick="fillLogin('m.e.santos@uol.com.br')">Elias</button><button class="tu-chip" onclick="fillLogin('marcilio.pereira.oliveira@gmail.com')">Marcílio</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="help-bar">★ Protótipo · Site da Turma · navegue pelo menu</div>
+
+<script src="assets/js/script.js"></script>
+</body>
+</html>
