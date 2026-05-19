@@ -2,275 +2,93 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Turma Marechal Deodoro · EsPCEx 1977/1979</title>
-<meta name="description" content="Site da Turma Marechal Deodoro da Fonseca - Escola Preparatória de Cadetes do Exército, 1977/1979. Memória permanente da turma e Encontro de 50 Anos.">
-<link rel="icon" type="image/webp" href="assets/img/logo.webp">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/estilo.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Face Book · Turma Marechal Deodoro · EsPCEx 1977</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{--verde:#1d5c3a;--verde-esc:#0f3320;--ouro:#c8973a;--ouro-cl:#e4b96a;--ouro-pale:#f0d89a;--creme:#f5f0e8;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{background:var(--verde-esc);font-family:'Source Sans 3',sans-serif;color:var(--creme);display:flex;flex-direction:column;height:100%;height:100dvh;user-select:none;-webkit-user-select:none;}
+header{flex:0 0 auto;background:linear-gradient(180deg,#0a2518 0%,var(--verde-esc) 100%);border-bottom:1px solid rgba(200,151,58,.3);padding:10px 16px 8px;text-align:center;position:relative;}
+header .escola{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.35em;color:var(--ouro);text-transform:uppercase;opacity:.85;}
+header h1{font-family:'Cinzel',serif;font-size:15px;font-weight:600;color:var(--ouro-pale);margin:3px 0 1px;line-height:1.2;letter-spacing:.04em;}
+header .ano{font-family:'IM Fell English',serif;font-size:12px;color:var(--ouro-cl);font-style:italic;opacity:.8;}
+.btn-idx{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:rgba(200,151,58,.15);border:1px solid rgba(200,151,58,.4);color:var(--ouro-cl);font-size:18px;width:36px;height:36px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.btn-idx:active{background:rgba(200,151,58,.3);}
+.stage{flex:1 1 0;display:flex;flex-direction:column;align-items:center;overflow:hidden;padding:8px 10px 0;gap:8px;}
+.frame{position:relative;width:100%;max-width:520px;flex:1 1 0;background:#0a1f12;border:1px solid rgba(200,151,58,.35);border-radius:4px;overflow:hidden;box-shadow:0 0 0 3px rgba(200,151,58,.12),0 20px 50px rgba(0,0,0,.6);}
+.frame img{width:100%;height:100%;object-fit:contain;display:block;background:#f2ede3;transition:opacity .25s;}
+.frame img.loading{opacity:0;}.frame img.loaded{opacity:1;}
+.placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--ouro-cl);}
+.ring{width:36px;height:36px;border:3px solid rgba(200,151,58,.2);border-top-color:var(--ouro);border-radius:50%;animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hint-swipe{position:absolute;bottom:10px;width:100%;text-align:center;font-size:10px;color:rgba(200,151,58,.4);letter-spacing:.12em;text-transform:uppercase;pointer-events:none;transition:opacity .4s;}
+.caption{flex:0 0 auto;text-align:center;padding:0 10px 2px;max-width:520px;width:100%;}
+.lbl{display:inline-block;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--verde-esc);background:var(--ouro-cl);padding:3px 14px;border-radius:20px;font-weight:600;margin-bottom:5px;}
+.desc{font-family:'IM Fell English',serif;font-size:13px;color:rgba(245,240,232,.75);line-height:1.4;font-style:italic;min-height:18px;}
+nav{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 14px calc(8px + env(safe-area-inset-bottom));background:linear-gradient(0deg,var(--verde-esc) 70%,transparent);max-width:520px;width:100%;align-self:center;}
+.btn-nav{flex:0 0 auto;background:var(--ouro);color:var(--verde-esc);border:none;font-family:'Cinzel',serif;font-size:11px;font-weight:700;letter-spacing:.08em;padding:12px 18px;border-radius:6px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.4);transition:transform .1s,background .1s;min-width:90px;text-align:center;}
+.btn-nav:active{transform:scale(.97);background:var(--ouro-cl);}.btn-nav:disabled{opacity:.3;cursor:default;}
+.counter{flex:1;text-align:center;}
+.counter .big{font-family:'Cinzel',serif;font-size:22px;font-weight:600;color:var(--ouro-pale);display:block;line-height:1;}
+.counter .tot{font-size:10px;color:rgba(200,151,58,.6);letter-spacing:.18em;}
+.overlay{display:none;position:fixed;inset:0;z-index:50;background:rgba(10,32,20,.97);backdrop-filter:blur(4px);flex-direction:column;}
+.overlay.open{display:flex;}
+.ov-head{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px 18px 12px;border-bottom:1px solid rgba(200,151,58,.2);}
+.ov-head h2{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.25em;color:var(--ouro-cl);text-transform:uppercase;}
+.btn-close{background:none;border:1px solid rgba(200,151,58,.3);color:var(--ouro-cl);font-size:20px;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.idx-list{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:4px 0 30px;}
+.idx-item{display:flex;align-items:center;gap:12px;padding:11px 18px;border-bottom:1px solid rgba(200,151,58,.08);cursor:pointer;}
+.idx-item:active{background:rgba(200,151,58,.08);}
+.idx-n{flex:0 0 28px;font-family:'Cinzel',serif;font-size:11px;color:var(--ouro);text-align:right;}
+.idx-pg{flex:0 0 42px;font-size:10px;color:rgba(200,151,58,.5);letter-spacing:.1em;}
+.idx-desc{flex:1;font-size:13px;color:var(--creme);opacity:.85;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+</style>
 </head>
 <body>
-<nav class="topnav">
-  <div class="topnav-inner">
-    <div class="brand" onclick="nav('inicio')">
-      <img src="assets/img/logo.webp" alt="EsPCEx" class="brand-logo">
-      <div class="brand-text">Turma Marechal Deodoro<small>EsPCEx · 1977 / 1979</small></div>
-    </div>
-    <div class="nav1">
-      <button class="nav1-item active" data-nav="inicio" onclick="nav('inicio')">Início</button>
-      <button class="nav1-item" data-nav="encontros" onclick="nav('encontros')">Encontros</button>
-      <button class="nav1-item" data-nav="historia" onclick="nav('historia')">História</button>
-      <button class="nav1-item" data-nav="galeria" onclick="nav('galeria')">Galeria</button>
-      <button class="nav1-item" data-nav="memoriam" onclick="nav('memoriam')">In Memoriam</button>
-      <button class="nav1-item login-btn" id="loginNavBtn" data-nav="login" onclick="nav('login')">Entrar</button>
-    </div>
+<header>
+  <div class="escola">Escola Preparatória de Cadetes do Exército</div>
+  <h1>The Face Book</h1>
+  <div class="ano">Turma Marechal Deodoro · 1977–1979</div>
+  <button class="btn-idx" id="btnIdx">☰</button>
+</header>
+<div class="stage">
+  <div class="frame" id="frame">
+    <div class="placeholder" id="ph"><div class="ring"></div><span style="font-size:11px;letter-spacing:.15em;opacity:.7">CARREGANDO</span></div>
+    <img id="img" alt="" class="loading">
+    <div class="hint-swipe" id="hint">← deslize →</div>
   </div>
+  <div class="caption">
+    <span class="lbl" id="lbl">—</span>
+    <div class="desc" id="desc"></div>
+  </div>
+</div>
+<nav>
+  <button class="btn-nav" id="prev">‹ Ant.</button>
+  <div class="counter"><span class="big" id="cNow">1</span><span class="tot">de <span id="cTot">108</span></span></div>
+  <button class="btn-nav" id="next">Próx. ›</button>
 </nav>
-
-<!-- ===================== INÍCIO ===================== -->
-<section class="screen active" id="scr-inicio">
-  <div class="event-banner" id="eventBanner" onclick="goEncontro()">
-    <div class="event-banner-inner">
-      <div class="event-banner-left">
-        <span class="event-banner-badge">Evento ativo</span>
-        <div class="event-banner-text">
-          <h3>Encontro 50 Anos da Entrada · 1977–2027</h3>
-          <p>Inscrições abertas — celebre meio século de história com a turma</p>
-        </div>
-      </div>
-      <button class="event-banner-cta">Ver o encontro</button>
-    </div>
-  </div>
-  <div class="home-hero">
-    <div class="home-hero-inner">
-      <img src="assets/img/logo.webp" alt="Brasão" class="home-hero-logo">
-      <div>
-        <h1>Turma Marechal Deodoro da Fonseca</h1>
-        <div class="tagline">Escola Preparatória de Cadetes do Exército · 1977 / 1979</div>
-        <div class="lead">Meio século de amizade, história e tradição. Este é o espaço permanente da nossa turma — memória viva de quem cruzou o portão da Prep e seguiu junto pela vida.</div>
-        <div class="motto-inline"><span>★</span> HONRA <span>★</span> DEVER <span>★</span> PÁTRIA <span>★</span></div>
-      </div>
-    </div>
-  </div>
-  <div class="home-body">
-    <div class="section-eyebrow">Nosso espaço</div>
-    <h2 class="section-title">Um lugar para a nossa história</h2>
-    <div class="section-text">
-      <p>Este site é a casa digital da Turma Marechal Deodoro. Aqui guardamos a memória dos nossos encontros, as fotografias, as histórias e a lembrança dos companheiros que partiram.</p>
-      <p>O conteúdo principal — história da turma, galeria, registros — será construído aos poucos, com a colaboração de todos. Por enquanto, o destaque é o nosso próximo grande momento: o Encontro de 50 Anos.</p>
-    </div>
-    <div class="nav-cards">
-      <div class="nav-card" onclick="nav('encontros')">
-        <span class="ico">📅</span><h3>Encontros</h3>
-        <p>Nossos reencontros ao longo dos anos. O próximo: 50 anos da entrada, em 2027.</p>
-        <span class="tag">Evento ativo →</span>
-      </div>
-      <div class="nav-card" onclick="nav('historia')">
-        <span class="ico">📜</span><h3>História</h3>
-        <p>A trajetória da turma desde 1977 — da Prep à vida que se seguiu.</p>
-        <span class="tag">Em breve</span>
-      </div>
-      <div class="nav-card" onclick="nav('memoriam')">
-        <span class="ico">🕯️</span><h3>In Memoriam</h3>
-        <p>Homenagem permanente aos companheiros que já nos deixaram.</p>
-        <span class="tag">Em breve</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== ENCONTROS ===================== -->
-<section class="screen" id="scr-encontros">
-  <div class="enc-header">
-    <h1>Encontros da Turma</h1>
-    <p>Cada reencontro, um capítulo da nossa história</p>
-  </div>
-  <div class="subnav">
-    <div class="subnav-inner">
-      <button class="subnav-item active" onclick="subEnc(this,'ev50')">50 Anos · 1977–2027</button>
-      <button class="subnav-item locked" title="A documentar">45 Anos · 2022</button>
-      <button class="subnav-item locked" title="A documentar">Anteriores</button>
-    </div>
-  </div>
-  <div class="enc-screen active" id="ev50">
-    <div class="subnav" style="position:relative;top:auto;background:var(--olive)">
-      <div class="subnav-inner">
-        <button class="subnav-item active" onclick="evScr(this,'landing')">Apresentação</button>
-        <button class="subnav-item" onclick="evScr(this,'inscricao')">Inscrição</button>
-        <button class="subnav-item" onclick="evScr(this,'conta')">Minha Conta</button>
-        <button class="subnav-item" onclick="evScr(this,'admin')">Admin</button>
-        <button class="subnav-item" onclick="evScr(this,'dashboard')">Dashboard</button>
-      </div>
-    </div>
-
-    <!-- LANDING -->
-    <div class="enc-screen active" id="evs-landing">
-      <div class="ev-hero">
-        <div class="ev-hero-inner">
-          <img src="assets/img/logo.webp" class="ev-hero-logo" alt="Brasão 50 anos">
-          <div>
-            <h2><span class="accent">É com grande alegria que convidamos você para o</span>Encontro 50 Anos da Entrada</h2>
-            <div class="ev-sub">Turma Marechal Deodoro da Fonseca · 1977–2027</div>
-            <div class="ev-meta">
-              <div class="ev-meta-item"><div class="l">Datas</div><div class="v">26 e 27 · Fev · 2027</div></div>
-              <div class="ev-meta-item"><div class="l">Local</div><div class="v">Campinas — SP</div></div>
-            </div>
-            <button class="ev-cta" onclick="evScr(document.querySelectorAll('#ev50 .subnav')[1].querySelectorAll('.subnav-item')[1],'inscricao')">Quero me inscrever</button>
-          </div>
-        </div>
-      </div>
-      <div class="ev-motto">HONRA <span>★</span> DEVER <span>★</span> PÁTRIA</div>
-      <div class="ev-body">
-        <div class="countdown-wrap">
-          <div class="countdown-label">Faltam para o pré-encontro · 26 de fevereiro de 2027</div>
-          <div class="countdown">
-            <div class="cd-block"><div class="n" id="cd-d">—</div><div class="l">dias</div></div>
-            <div class="cd-block"><div class="n" id="cd-h">—</div><div class="l">horas</div></div>
-            <div class="cd-block"><div class="n" id="cd-m">—</div><div class="l">minutos</div></div>
-            <div class="cd-block"><div class="n" id="cd-s">—</div><div class="l">segundos</div></div>
-          </div>
-          <div class="countdown-target">Sexta-feira · pré-encontro · 20h</div>
-        </div>
-        <div class="section-eyebrow">Nossa história</div>
-        <h2 class="section-title">Cinco décadas depois</h2>
-        <div class="section-text">
-          <p>Em 1977 cruzamos pela primeira vez o portão da Escola Preparatória de Cadetes do Exército. Cinquenta anos depois, voltaremos à nossa querida escola — agora com famílias, histórias e a certeza de que a amizade resistiu ao tempo.</p>
-          <p>Este encontro é a oportunidade de revisitar memórias, abraçar os companheiros de farda, lembrar dos que partiram e brindar aos cinquenta anos que nos uniram para sempre.</p>
-        </div>
-        <div style="margin-top:46px"></div>
-        <div class="section-eyebrow">Programação</div>
-        <h2 class="section-title">Dois dias inesquecíveis</h2>
-        <div class="program">
-          <div class="prog-card"><div class="d">Sexta · 26.Fev</div><h3>Pré-Encontro</h3><p>Confraternização informal, jantar e reencontros com companheiros que chegam de tantos locais diferentes.</p></div>
-          <div class="prog-card"><div class="d">Sábado · 27.Fev · Manhã</div><h3>Cerimônia oficial</h3><p>Welcome coffee, entrada pelo portão, homenagem aos que partiram, palavras do orador e fotos.</p></div>
-          <div class="prog-card"><div class="d">Sábado · 27.Fev · Tarde</div><h3>Casa de Barcos</h3><p>Almoço de confraternização com churrasco, música ao vivo e celebração com famílias.</p></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- INSCRIÇÃO -->
-    <div class="enc-screen" id="evs-inscricao">
-      <div class="insc-wrap" id="inscContent"></div>
-    </div>
-
-    <!-- MINHA CONTA -->
-    <div class="enc-screen" id="evs-conta">
-      <div class="acct-wrap" id="contaContent"></div>
-    </div>
-
-    <!-- ADMIN -->
-    <div class="enc-screen" id="evs-admin">
-      <div class="admin-wrap" id="adminContent"></div>
-    </div>
-
-    <!-- DASHBOARD -->
-    <div class="enc-screen" id="evs-dashboard">
-      <div class="dash-wrap" id="dashContent"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== HISTÓRIA ===================== -->
-<section class="screen" id="scr-historia">
-  <div class="placeholder-wrap">
-    <div class="placeholder-ico">📜</div>
-    <h2>História da Turma</h2>
-    <div class="sub">Esta seção guardará a trajetória da Turma Marechal Deodoro, de 1977 até hoje.</div>
-    <div class="placeholder-box">
-      <strong>Conteúdo planejado</strong>
-      Espaço em construção. Aqui reuniremos a memória escrita da turma.
-      <ul class="placeholder-list">
-        <li>A entrada na Prep em 1977 e os anos de formação</li>
-        <li>Trajetórias e carreiras dos integrantes</li>
-        <li>Documentos e boletins históricos da época</li>
-        <li>Depoimentos e relatos dos companheiros</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== GALERIA ===================== -->
-<section class="screen" id="scr-galeria">
-  <div class="home-body">
-    <div class="section-eyebrow">Acervo da turma</div>
-    <h2 class="section-title">Galeria & Memória Visual</h2>
-    <div class="section-text">
-      <p>O acervo de fotografias e registros da turma, dos tempos de cadete aos dias atuais. Começamos por um tesouro: o anuário de 1979.</p>
-    </div>
-    <div class="nav-cards" style="margin-top:44px">
-      <div class="nav-card" onclick="window.open('revista/','_blank')" style="border-top-color:var(--wine)">
-        <span class="ico">📖</span>
-        <h3>The Face Book · 1979</h3>
-        <p>O anuário histórico da turma, da capa com a placa dos formandos à última página. 108 páginas digitalizadas, folheáveis.</p>
-        <span class="tag" style="color:var(--wine)">Abrir a revista →</span>
-      </div>
-      <div class="nav-card" style="opacity:.6;cursor:default">
-        <span class="ico">📷</span>
-        <h3>Encontros anteriores</h3>
-        <p>Registros fotográficos dos reencontros da turma ao longo das décadas.</p>
-        <span class="tag">Em breve</span>
-      </div>
-      <div class="nav-card" style="opacity:.6;cursor:default">
-        <span class="ico">🎥</span>
-        <h3>Encontro 50 Anos</h3>
-        <p>O álbum e os vídeos do nosso grande reencontro — disponível após fevereiro de 2027.</p>
-        <span class="tag">Após o evento</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== IN MEMORIAM ===================== -->
-<section class="screen" id="scr-memoriam">
-  <div class="placeholder-wrap">
-    <div class="placeholder-ico">🕯️</div>
-    <h2>In Memoriam</h2>
-    <div class="sub">Homenagem permanente aos companheiros que já nos deixaram. Que sua memória nos acompanhe sempre.</div>
-    <div class="placeholder-box">
-      <strong>Conteúdo planejado</strong>
-      Espaço em construção, a ser preenchido com cuidado e respeito.
-      <ul class="placeholder-list">
-        <li>Relação dos companheiros falecidos (a partir do cadastro da turma)</li>
-        <li>Memórias e homenagens individuais</li>
-        <li>Momento de silêncio simbólico no Encontro de 50 Anos</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== LOGIN ===================== -->
-<section class="screen" id="scr-login">
-  <div class="login-wrap">
-    <div class="login-card" id="loginCard">
-      <img src="assets/img/logo.webp" class="login-logo" alt="Brasão">
-      <h2>Área do Integrante</h2>
-      <div class="login-sub">Acesso exclusivo aos integrantes da turma</div>
-      <div class="login-error" id="loginError">Este e-mail ou telefone não consta no cadastro da turma. O acesso é restrito aos integrantes.</div>
-      <div class="login-field">
-        <label>E-mail ou telefone</label>
-        <input type="text" id="loginUser" placeholder="seu@email.com ou (11) 99999-9999">
-      </div>
-      <div class="login-field">
-        <label>Senha</label>
-        <input type="password" id="loginPass" placeholder="sua senha">
-      </div>
-      <button class="login-btn-main" onclick="doLogin()">Entrar</button>
-      <div class="login-divider"><span>ou</span></div>
-      <div class="login-alt" onclick="alert('No protótipo, use um dos perfis de teste abaixo. Na versão final, aqui o integrante cria a senha — validado contra o cadastro da turma.')">Primeiro acesso? Criar minha senha</div>
-      <div class="login-note">
-        <strong>ACESSO RESTRITO</strong><br>
-        Somente integrantes da Turma Marechal Deodoro podem criar acesso. O cadastro é validado automaticamente — pessoas de fora não conseguem entrar. O site é livre para visitação; o login serve para a área do integrante.
-      </div>
-      <div class="test-users">
-        <div class="tu-title">Perfis de teste (comissão organizadora)</div>
-        <div class="tu-grid"><button class="tu-chip" onclick="fillLogin('riva.cerqueira@gmail.com')">Rivail</button><button class="tu-chip" onclick="fillLogin('andre.novaes63@gmail.com')">André Novaes</button><button class="tu-chip" onclick="fillLogin('baggio@exemplo.com')">Baggio</button><button class="tu-chip" onclick="fillLogin('newtonraulino@hotmail.com')">Raulino</button><button class="tu-chip" onclick="fillLogin('everton@exemplo.com')">Everton</button><button class="tu-chip" onclick="fillLogin('guy@exemplo.com')">Guy</button><button class="tu-chip" onclick="fillLogin('m.e.santos@uol.com.br')">Elias</button><button class="tu-chip" onclick="fillLogin('marcilio.pereira.oliveira@gmail.com')">Marcílio</button></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="help-bar">★ Protótipo · Site da Turma · navegue pelo menu</div>
-
-<script src="assets/js/script.js"></script>
+<div class="overlay" id="ov">
+  <div class="ov-head"><h2>Índice da Revista</h2><button class="btn-close" id="ovClose">×</button></div>
+  <div class="idx-list" id="idxList"></div>
+</div>
+<script>
+const PAGES=[{"n": 1, "id": "1cow0EibuOA5vGTTKEVCosgEtOzvTqEbk", "pagina": "CAPA", "conteudo": "Placa metalica Turma Marechal Deodoro 1979 - lista sobrenomes", "rotulo": "Capa", "url": "../001_CAPA_placa_metalica.jpg"}, {"n": 2, "id": "1vW2OAqjCVBSOr6mSmw_4MF4tqwxd_TCN", "pagina": "2", "conteudo": "Biografia Marechal Deodoro", "rotulo": "p. 2", "url": "../002_p02_biografia_marechal_deodoro.jpg"}, {"n": 3, "id": "1JOpUk_ouCdNDhMVnUOUUh5oVNqEbTsfZ", "pagina": "3", "conteudo": "INDICE da revista", "rotulo": "p. 3", "url": "../003_p03_indice_da_revista.jpg"}, {"n": 4, "id": "1uaSFtohF7aWCjZ0mdWsOXnLEXw-PKXY2", "pagina": "4", "conteudo": "Editorial", "rotulo": "p. 4", "url": "../004_p04_editorial.jpg"}, {"n": 5, "id": "1luk8MtgxflNc3rxfhizZpzbkzOhSJxkN", "pagina": "5", "conteudo": "Historico da EsPCEx", "rotulo": "p. 5", "url": "../005_p05_historico_espcex.jpg"}, {"n": 6, "id": "1IQcm1-qehdH5ydedvB64quv4nkFaF-yS", "pagina": "6", "conteudo": "O Comando da Escola", "rotulo": "p. 6", "url": "../006_p06_comando_da_escola.jpg"}, {"n": 7, "id": "1oAJZpCmcztty0ojcAlteeXsDXCvBYsyr", "pagina": "7", "conteudo": "Mensagem do Comandante e Subcomandante aos formandos", "rotulo": "p. 7", "url": "../007_p07_mensagem_comandante.jpg"}, {"n": 8, "id": "1L2liHMRd8xI3-l5jAzdZMMO0niM-LhMT", "pagina": "8", "conteudo": "Nossa Escola - abertura secao (titulo + vistas portao/torre)", "rotulo": "p. 8", "url": "../008_p08_nossa_escola_abertura.jpg"}, {"n": 9, "id": "1cmDg8TTDIpq4ZarjxY-zAQG-MEtwp8mu", "pagina": "9", "conteudo": "Nossa Escola - vistas (torre/pergola/galerias)", "rotulo": "p. 9", "url": "../009_p09_nossa_escola_vistas.jpg"}, {"n": 10, "id": "1THfiaBAt9NTrY8c1Ap3hV32IoB3u8vKz", "pagina": "10", "conteudo": "Nossa Escola - mastros/parada/pavilhao", "rotulo": "p. 10", "url": "../010_p10_nossa_escola_mastros.jpg"}, {"n": 11, "id": "1QERV5Lfwv8gEMKRw8YJMLm5q7JKZfjuJ", "pagina": "12", "conteudo": "O Dia do Aluno (alvorada/aulas/rancho/almoco)", "rotulo": "p. 12", "url": "../011_p12_dia_do_aluno.jpg"}, {"n": 12, "id": "17sMhYjK_iN-sxWyugUER4hfBmQqqUTb_", "pagina": "14", "conteudo": "Divisao Administrativa", "rotulo": "p. 14", "url": "../012_p14_divisao_administrativa.jpg"}, {"n": 13, "id": "194PLnLad632wpJ8qQClxeiLpWscaCjJP", "pagina": "15", "conteudo": "Divisao de Ensino / Orientacao Educacional", "rotulo": "p. 15", "url": "../013_p15_divisao_ensino.jpg"}, {"n": 14, "id": "1O9WDSweMezwg2Fc6YI3w0lV8FoHoaUiF", "pagina": "16", "conteudo": "Nossos Mestres Quimica/Matematica/Estudos Sociais", "rotulo": "p. 16", "url": "../014_p16_nossos_mestres_quimica.jpg"}, {"n": 15, "id": "14dKz3uPie6l784ZRSgOjbUgG-D-f2y1n", "pagina": "17", "conteudo": "Nossos Mestres Fisica/Desenho/Portugues/Biologia", "rotulo": "p. 17", "url": "../015_p17_nossos_mestres_fisica.jpg"}, {"n": 16, "id": "16xCJv0n_wXO4MbhWO3F3lf7MMKXGcbyP", "pagina": "18", "conteudo": "Olimesco Olimpiadas Escolares", "rotulo": "p. 18", "url": "../016_p18_olimesco_olimpiadas.jpg"}, {"n": 17, "id": "1QYUDOW3EfH7pd2WCnAdTgU8NAGKfEzK-", "pagina": "19", "conteudo": "Olimesco continuacao - selecao atletas NAE", "rotulo": "p. 19", "url": "../017_p19_olimesco_atletas_nae.jpg"}, {"n": 18, "id": "11WkMZzHu0TTtSeA0PUYWu9WcluWX11Wn", "pagina": "20", "conteudo": "Auxilio aos Alunos / Educacao Fisica / Funcionarios", "rotulo": "p. 20", "url": "../018_p20_auxilio_alunos.jpg"}, {"n": 19, "id": "1knvvyC-rgpIpjtrw-ygbpC_VV54SqQ5C", "pagina": "21", "conteudo": "Gremios (Sampaio/Mallet/Vilagran Cabrita)", "rotulo": "p. 21", "url": "../019_p21_gremios.jpg"}, {"n": 20, "id": "12-ZLV5tF8A7f15Vw8TtOgXkMMQPbeJMy", "pagina": "22", "conteudo": "TADECs Volei/Capoeira/Violao/Radio", "rotulo": "p. 22", "url": "../020_p22_tadecs_volei_capoeira.jpg"}, {"n": 21, "id": "1T9sbNJaJ2XLv7K1vpxgsZh3nvUMxQO76", "pagina": "23", "conteudo": "Equipe de Cinema/Karate/Ginastica/Esgrima/Basquete", "rotulo": "p. 23", "url": "../021_p23_cinema_karate_ginastica.jpg"}, {"n": 22, "id": "178uKIWpyQNZDs6qGMKjfPKblMEP7Codd", "pagina": "24", "conteudo": "Dia da Vitoria / Dia da Infantaria (monumentos)", "rotulo": "p. 24", "url": "../022_p24_dia_da_vitoria_infantaria.jpg"}, {"n": 23, "id": "1zexZb7UF_ompJwBHYTj-GTjXxLJdjK0e", "pagina": "25", "conteudo": "Dia da Vitoria / Dia da Infantaria", "rotulo": "p. 25", "url": "../023_p25_dia_da_vitoria_infantaria.jpg"}, {"n": 24, "id": "188hYqaOHBV78fQ22MF3AcQJPvi2DyvA_", "pagina": "26", "conteudo": "Campinas", "rotulo": "p. 26", "url": "../024_p26_campinas.jpg"}, {"n": 25, "id": "1lHARa47Vvpi8mqNSZ5NzpUeKyRB6g5ou", "pagina": "27", "conteudo": "Grupo de Acampamento Folcloricos", "rotulo": "p. 27", "url": "../025_p27_acampamento_folcloricos.jpg"}, {"n": 26, "id": "1zOova6EG5J3FRC7X2XnXJDWuLpXq4N4O", "pagina": "28", "conteudo": "Nucleos Religiosos UCM/NAE/NUME/NAM", "rotulo": "p. 28", "url": "../026_p28_nucleos_religiosos.jpg"}, {"n": 27, "id": "1RMFIIzOIgRB4CvKlt1oHeHVTCLUD8l8V", "pagina": "29", "conteudo": "Dia das Maes (textos)", "rotulo": "p. 29", "url": "../027_p29_dia_das_maes.jpg"}, {"n": 28, "id": "10ITJ-tj7o7KhUCVmppN49hGxQ0Wze9Up", "pagina": "30", "conteudo": "Abertura da NAE (tocha olimpica/Colegio Naval/EMFA)", "rotulo": "p. 30", "url": "../028_p30_abertura_nae.jpg"}, {"n": 29, "id": "1bANjlFPIIMvlY0qcKpZ5RPzFrF72v5LS", "pagina": "31", "conteudo": "NAE esportes (futebol/basquete/judo/natacao)", "rotulo": "p. 31", "url": "../029_p31_nae_esportes.jpg"}, {"n": 30, "id": "1L-WkEIICEmIJKcSmt7SV00pjjpKZD9fU", "pagina": "32", "conteudo": "Equipe Volei/atletismo/A Uniao no Encerramento", "rotulo": "p. 32", "url": "../030_p32_volei_atletismo.jpg"}, {"n": 31, "id": "1LUS5QjCeBg-cKcS7MtFx5b989bEEr6Wg", "pagina": "33", "conteudo": "NAE resultados esportivos", "rotulo": "p. 33", "url": "../031_p33_nae_resultados.jpg"}, {"n": 32, "id": "1N2gkPYPyEyzPUIhshamh-N2tveRIyvru", "pagina": "35", "conteudo": "V Comunicancao - festival de musica", "rotulo": "p. 35", "url": "../032_p35_comunicancao_festival.jpg"}, {"n": 33, "id": "1UP2GBJg3Wt-LjDdd0mCkKpAd-uZl7sLz", "pagina": "36", "conteudo": "Orquestra Sinfonica de Campinas", "rotulo": "p. 36", "url": "../033_p36_orquestra_sinfonica.jpg"}, {"n": 34, "id": "1uS7DO8HHVkyRme-eLrQYoYeJyGO3J4nZ", "pagina": "37", "conteudo": "Oracao sem nome (poema)", "rotulo": "p. 37", "url": "../034_p37_oracao_poema.jpg"}, {"n": 35, "id": "17AqMxPrZhVTuIGA8hg4ai5dHlzLW27fc", "pagina": "38", "conteudo": "Nossos Acampamentos", "rotulo": "p. 38", "url": "../035_p38_nossos_acampamentos.jpg"}, {"n": 36, "id": "1h_MUSsiPoYXGJ2oyqZC-QlXT0c9QGTDC", "pagina": "39", "conteudo": "Pensamento militar (suor/vontade)", "rotulo": "p. 39", "url": "../036_p39_pensamento_militar.jpg"}, {"n": 37, "id": "1Adf3-o0MabF1awAiGL7Pqd4KdQaXCklF", "pagina": "40", "conteudo": "Acampamento instrucao militar (tiro/obstaculos/combate)", "rotulo": "p. 40", "url": "../037_p40_acampamento_instrucao.jpg"}, {"n": 38, "id": "1Kr06wmXbFsuVaCSnO9WZFCPDuMYYadIn", "pagina": "41", "conteudo": "Aluno: Hoje es um simbolo - acampamento", "rotulo": "p. 41", "url": "../038_p41_aluno_simbolo.jpg"}, {"n": 39, "id": "1_Ict6XhcQ4i-HxOvBUM2RtCpH4C8q1Th", "pagina": "44", "conteudo": "CCS - Companhia de Comando e Servicos", "rotulo": "p. 44", "url": "../039_p44_ccs_companhia.jpg"}, {"n": 40, "id": "1VLl1LEhkzMiFnkQU2kZUC3PR--rtDsHY", "pagina": "45", "conteudo": "Monitores das Companhias", "rotulo": "p. 45", "url": "../040_p45_monitores_companhias.jpg"}, {"n": 41, "id": "1Y0fL24x-1QPgrfnNaNJz7e0IANyET_Wx", "pagina": "46", "conteudo": "7 de Setembro / Semana da Patria", "rotulo": "p. 46", "url": "../041_p46_sete_setembro.jpg"}, {"n": 42, "id": "1qAw1rkzTAd6F7COC7Ff-wESwgX3IoI7E", "pagina": "47", "conteudo": "Dia do Soldado (texto Dalton)", "rotulo": "p. 47", "url": "../042_p47_dia_do_soldado.jpg"}, {"n": 43, "id": "14_VdP3DMlS8fxgoGwoDoMi9VEzTZObv-", "pagina": "50", "conteudo": "Novos Oficiais do Corpo de Alunos", "rotulo": "p. 50", "url": "../043_p50_oficiais_corpo_alunos.jpg"}, {"n": 44, "id": "1bN-fGTGu49-7aVWSRzHZ8yqDT9DESdjK", "pagina": "SAMPAIO", "conteudo": "Turma Sampaio - O Infante Imortal / 1 ano 1979", "rotulo": "Turma Sampaio", "url": "../044_turma_sampaio.jpg"}, {"n": 45, "id": "1Fe06CDPX4srnEbnU_eWhHoFzr6DQ3kuX", "pagina": "52", "conteudo": "Cancao da 1 Cia AL / Turma A-1 A-2", "rotulo": "p. 52", "url": "../045_p52_cancao_1cia_turma_a1_a2.jpg"}, {"n": 46, "id": "1HurLXtuyq-LXnLEnynqvf0U6PIorfj7t", "pagina": "53", "conteudo": "Turmas de Aula A-3 a A-8 (fotos posadas)", "rotulo": "p. 53", "url": "../046_p53_turmas_aula_a3_a8.jpg"}, {"n": 47, "id": "17InfSgaGuZeLJ0wHrPD1cFv2AIG4OyMT", "pagina": "54", "conteudo": "A Fala do Soldado (poema)", "rotulo": "p. 54", "url": "../047_p54_fala_do_soldado.jpg"}, {"n": 48, "id": "17rYTCLpwhUSNmiJq1hLzd7FiYLmRdnIR", "pagina": "55", "conteudo": "Turma Dragoes da Independencia (historico 2 ano)", "rotulo": "p. 55", "url": "../048_p55_turma_dragoes.jpg"}, {"n": 49, "id": "1S9E6843TBwnoxHNle78bfLDehTkLUEg8", "pagina": "56", "conteudo": "Cancao da 2 Cia / Turma B-1 B-2", "rotulo": "p. 56", "url": "../049_p56_cancao_2cia_turma_b1_b2.jpg"}, {"n": 50, "id": "1NcxUYvsw5ooXtpagVy6sODQ3EXYHhtxN", "pagina": "57", "conteudo": "Turmas de Aula B-3 a B-8 (fotos posadas)", "rotulo": "p. 57", "url": "../050_p57_turmas_aula_b3_b8.jpg"}, {"n": 51, "id": "1Ed6RM0bjUoeTPBjDHzsNgKlumM5tdG5V", "pagina": "58", "conteudo": "Destaques do 3 ano", "rotulo": "p. 58", "url": "../051_p58_destaques_3ano.jpg"}, {"n": 52, "id": "1JCSJfb-TrdcBvc2TgylzjGOR__NNb_qy", "pagina": "59", "conteudo": "Instrucao Militar / Pentatlo Nacional", "rotulo": "p. 59", "url": "../052_p59_instrucao_pentatlo.jpg"}, {"n": 53, "id": "1Qz_749IYT_7VNIJIHFZDG43gzr4WAJWc", "pagina": "60", "conteudo": "E Finalmente - Formatura (guarda de honra/entrada formandos/pavilhao)", "rotulo": "p. 60", "url": "../053_p60_formatura.jpg"}, {"n": 54, "id": "1KsYbbDZLdQQhsnEej1nrtpSHypjxHYEn", "pagina": "62", "conteudo": "Cancao da 3 Cia AL", "rotulo": "p. 62", "url": "../054_p62_cancao_3cia.jpg"}, {"n": 55, "id": "15HGvMXnRoTP4DZ6-2G8IArPdilgLPoQv", "pagina": "63", "conteudo": "Ate Breve EsPCEx (texto De Sa)", "rotulo": "p. 63", "url": "../055_p63_ate_breve_espcex.jpg"}, {"n": 56, "id": "1NI7mSrAQfgNtiDJqDaM2oLHuTgu7jBIa", "pagina": "64", "conteudo": "Retratos individuais (Admilson ao Mansur)", "rotulo": "p. 64", "url": "../056_p64_retratos_admilson_mansur.jpg"}, {"n": 57, "id": "1ij8IBepdDkqzb7BapgTpdILJROEbPZFn", "pagina": "65", "conteudo": "Retratos individuais (Fenley ao Collares)", "rotulo": "p. 65", "url": "../057_p65_retratos_fenley_collares.jpg"}, {"n": 58, "id": "1-MWj6S5srvPsTgej0o0coG4KS7Y3kzbz", "pagina": "66", "conteudo": "Retratos individuais (Lages ao Kaled Jr)", "rotulo": "p. 66", "url": "../058_p66_retratos_lages_kaled.jpg"}, {"n": 59, "id": "1pIHDsmEx1JumIg545hrzsjR_8qRIKBmr", "pagina": "67", "conteudo": "Retratos individuais (Lucca ao Edivaldo)", "rotulo": "p. 67", "url": "../059_p67_retratos_lucca_edivaldo.jpg"}, {"n": 60, "id": "1N5p9cL2FsCFAMUe47foj4VSfMtP7yMva", "pagina": "68", "conteudo": "Retratos individuais (Andre Luis Novaes ao Nolasco)", "rotulo": "p. 68", "url": "../060_p68_retratos_andrelu_nolasco.jpg"}, {"n": 61, "id": "1odMp1cct6MsRFYXWXMcBVn0ZmyQOuNOE", "pagina": "68", "conteudo": "Retratos individuais (Colombiano ao Contreiras)", "rotulo": "p. 68", "url": "../061_p68b_retratos_colombiano_contreiras.jpg"}, {"n": 62, "id": "1_nt27NvboUI7lz55SDZtltg2x_j90J-g", "pagina": "69", "conteudo": "Retratos individuais (Leonelli ao Barreto Rosa)", "rotulo": "p. 69", "url": "../062_p69_retratos_leonelli_barreto.jpg"}, {"n": 63, "id": "1-6HNWeXGzbQ2xkDd3PMbKzMjNUUzj-bT", "pagina": "70", "conteudo": "Retratos individuais (Rui Santiago ao Dineo Lopes)", "rotulo": "p. 70", "url": "../063_p70_retratos_ruisantiago_dineo.jpg"}, {"n": 64, "id": "1EqLOehmnc1qqaAP0BiCeVec9lfk71Kg0", "pagina": "71", "conteudo": "Retratos individuais (Schneider ao Elias)", "rotulo": "p. 71", "url": "../064_p71_retratos_schneider_elias.jpg"}, {"n": 65, "id": "1jUTng74x8Wd3e0cpZI_OzrPrKsyvva-9", "pagina": "72", "conteudo": "Retratos individuais (Passarini ao Ramos)", "rotulo": "p. 72", "url": "../065_p72_retratos_passarini_ramos.jpg"}, {"n": 66, "id": "1hKh553iUfOPhfoe_Iom9yZ1QeTXfyoch", "pagina": "73", "conteudo": "Retratos individuais (Stenio ao Kirk)", "rotulo": "p. 73", "url": "../066_p73_retratos_stenio_kirk.jpg"}, {"n": 67, "id": "1n1LINbLc-mQMcRI9eg2H6KlhrPwnfqPl", "pagina": "74", "conteudo": "Retratos individuais (Pelegio ao Paes)", "rotulo": "p. 74", "url": "../067_p74_retratos_pelegio_paes.jpg"}, {"n": 68, "id": "1ZnuOKBi3X0Hb-1hlEuvs7lfAZnndMHhO", "pagina": "75", "conteudo": "Retratos individuais (Costa Pereira ao Rocha Neves)", "rotulo": "p. 75", "url": "../068_p75_retratos_costapereira_rochaneves.jpg"}, {"n": 69, "id": "1ld-6ly54vVdjwX8WMRVXX42JhN3Ktcia", "pagina": "76", "conteudo": "Retratos individuais (Rivail ao Anchieta)", "rotulo": "p. 76", "url": "../069_p76_retratos_rivail_anchieta.jpg"}, {"n": 70, "id": "1DzsMvuiWpYyiz777kUIOeqHwSjbf9ZuR", "pagina": "77", "conteudo": "Retratos individuais (Fernando Gomes ao Freitas)", "rotulo": "p. 77", "url": "../070_p77_retratos_fernandogomes_freitas.jpg"}, {"n": 71, "id": "1xPITj_OaceIvrga8aoH6xqR7Y4U3-7xG", "pagina": "78", "conteudo": "Retratos individuais (Marcilio ao Pateo)", "rotulo": "p. 78", "url": "../071_p78_retratos_marcilio_pateo.jpg"}, {"n": 72, "id": "1JV0BCHfe9dX9uYv03Pplkv95JsIaunYy", "pagina": "79", "conteudo": "Retratos individuais (Moraes Tavares ao Coutinho)", "rotulo": "p. 79", "url": "../072_p79_retratos_moraes_coutinho.jpg"}, {"n": 73, "id": "1c8p_sLBKIm2AfzrVQ5b2SBrXvnsDD22I", "pagina": "80", "conteudo": "Retratos individuais (Daniel Peres ao Baggio)", "rotulo": "p. 80", "url": "../073_p80_retratos_daniel_baggio.jpg"}, {"n": 74, "id": "1v__KqGSQOq7VyXJJFdNJAYjZoYIcsYWU", "pagina": "81", "conteudo": "Retratos individuais (Foster ao Aragao)", "rotulo": "p. 81", "url": "../074_p81_retratos_foster_aragao.jpg"}, {"n": 75, "id": "1Fv3uss1it83WbbsZZMPDNNllSDHHgHG9", "pagina": "82", "conteudo": "Retratos individuais (Keber ao Americo)", "rotulo": "p. 82", "url": "../075_p82_retratos_keber_americo.jpg"}, {"n": 76, "id": "1kVFa63DNfTo9SybuvRliTRPSUWJAxsfb", "pagina": "83", "conteudo": "Retratos individuais (a confirmar posicao exata)", "rotulo": "p. 83", "url": "../076_p83_retratos_individuais.jpg"}, {"n": 77, "id": "10oVHv28XNplqpF6wVEC2Fq9rc2RAv_bz", "pagina": "84", "conteudo": "Retratos individuais (Lucidio ao Oriente)", "rotulo": "p. 84", "url": "../077_p84_retratos_lucidio_oriente.jpg"}, {"n": 78, "id": "16r_3XXNOhSUfwFXaBQrEK56O2b55MkYM", "pagina": "85", "conteudo": "Retratos individuais (De Simone ao Delano)", "rotulo": "p. 85", "url": "../078_p85_retratos_desimone_delano.jpg"}, {"n": 79, "id": "1Mn9h4amCKzEK1O4MOHtV4k-FhjGZe3Gl", "pagina": "86", "conteudo": "Retratos individuais (Cabral Neto ao Costa e Silva)", "rotulo": "p. 86", "url": "../079_p86_retratos_cabral_costasilva.jpg"}, {"n": 80, "id": "1qwffYc0E62lUGQRy0LQzdyfD7MXzAxcf", "pagina": "87", "conteudo": "Retratos individuais (Veiga ao Plisio Toledo)", "rotulo": "p. 87", "url": "../080_p87_retratos_veiga_plisio.jpg"}, {"n": 81, "id": "12S6MWgec4irTwRirAkW4fa4HMl4s4wGm", "pagina": "88", "conteudo": "Retratos individuais (Ramis ao Schiozer)", "rotulo": "p. 88", "url": "../081_p88_retratos_ramis_schiozer.jpg"}, {"n": 82, "id": "1bZQZiUFx12SwUmJ6_ZPuDapYyRyFdGLw", "pagina": "89", "conteudo": "Companheiros que nos Deixaram", "rotulo": "p. 89", "url": "../082_p89_companheiros_que_nos_deixaram.jpg"}, {"n": 83, "id": "12ORD6RAsgHgjjK1inMjgKG00Qd2knDYi", "pagina": "90", "conteudo": "Sociedade Recreativa Literaria / fotografos revista", "rotulo": "p. 90", "url": "../083_p90_srl_fotografos.jpg"}, {"n": 84, "id": "172VKbMj6nJV7lORaeYSiPC10Co1MK6yH", "pagina": "91", "conteudo": "TURMA MARECHAL DEODORO - abertura lista formandos", "rotulo": "p. 91", "url": "../084_p91_turma_marechal_deodoro_lista.jpg"}, {"n": 85, "id": "1uCvGUcfWzuARRfEmGKDCDlps6MqQA9yK", "pagina": "91", "conteudo": "Assinaturas de Alunos", "rotulo": "p. 91", "url": "../085_p91b_assinaturas_alunos.jpg"}, {"n": 86, "id": "1wJCXeBX_Xy7i9nuETruK8lkNUTpa-j76", "pagina": "92", "conteudo": "Turma Marechal Deodoro - dedicatorias/assinaturas", "rotulo": "p. 92", "url": "../086_p92_dedicatorias_assinaturas.jpg"}, {"n": 87, "id": "1kmyXgwUfH9o13uD8OtJhDHRwhGcLOIV9", "pagina": "93", "conteudo": "Turma Marechal Deodoro - assinaturas/dedicatorias", "rotulo": "p. 93", "url": "../087_p93_assinaturas_dedicatorias.jpg"}, {"n": 88, "id": "1Xdfx9fTjOMxJSo2cRQKGQWRplBAM1DVo", "pagina": "94", "conteudo": "Foto panoramica da Turma toda (torre ao fundo)", "rotulo": "p. 94", "url": "../088_p94_foto_panoramica_turma.jpg"}, {"n": 89, "id": "1NvkrIJk3yGK_Z89XWNt9aUzL3oqvZpQm", "pagina": "95", "conteudo": "Foto historica turma em frente ao pavilhao principal", "rotulo": "p. 95", "url": "../089_p95_foto_historica_pavilhao.jpg"}, {"n": 90, "id": "1BAluZwak2Znqw3DqOXrcK7ts9DoKZ9X9", "pagina": "96", "conteudo": "Relacao enderecos Tu C1", "rotulo": "p. 96", "url": "../090_p96_enderecos_tuC1.jpg"}, {"n": 91, "id": "1EgudZO-vb82-DnUViaF8J-Wpbi2a_3ke", "pagina": "97", "conteudo": "Relacao enderecos Tu C2", "rotulo": "p. 97", "url": "../091_p97_enderecos_tuC2.jpg"}, {"n": 92, "id": "1kwlMGkWJg-uHxtMaEGVufbIE3D5PsFAq", "pagina": "98", "conteudo": "Relacao enderecos/datas nascimento", "rotulo": "p. 98", "url": "../092_p98_enderecos.jpg"}, {"n": 93, "id": "1nOtYdg0c9coSaAzQ2am7lQE_c8dcaIVd", "pagina": "99", "conteudo": "Relacao enderecos Tu C3", "rotulo": "p. 99", "url": "../093_p99_enderecos_tuC3.jpg"}, {"n": 94, "id": "1QgMQUVRyGt8jL2Jk_XvZBjgmNOUCd3cN", "pagina": "100", "conteudo": "Relacao enderecos/datas nascimento", "rotulo": "p. 100", "url": "../094_p100_enderecos.jpg"}, {"n": 95, "id": "1wl2PEK8C9RVZuiDgsopqPB2fIdmEJJLh", "pagina": "102", "conteudo": "Relacao enderecos", "rotulo": "p. 102", "url": "../095_p102_enderecos.jpg"}, {"n": 96, "id": "1Y_Cozp3dQsKBIkRe1clxgXprh3oQEp7R", "pagina": "103", "conteudo": "Relacao enderecos/datas nascimento", "rotulo": "p. 103", "url": "../096_p103_enderecos.jpg"}, {"n": 97, "id": "1a7gY8mNhU3MXLYQKU-Mmoqa7ipT_19dk", "pagina": "104", "conteudo": "Relacao enderecos", "rotulo": "p. 104", "url": "../097_p104_enderecos.jpg"}, {"n": 98, "id": "1g0Cd7y39o4BnqN3tHdbrKECq9ztwPDZJ", "pagina": "105", "conteudo": "Relacao enderecos Tu C6", "rotulo": "p. 105", "url": "../098_p105_enderecos_tuC6.jpg"}, {"n": 99, "id": "1C8X151oWXTGO8LWcWJQTRKpekuG4gmE6", "pagina": "106", "conteudo": "Relacao enderecos Tu C7", "rotulo": "p. 106", "url": "../099_p106_enderecos_tuC7.jpg"}, {"n": 100, "id": "1DcS7-DhZHzg6FG-AQoMmTcaarJQEke-z", "pagina": "107", "conteudo": "Relacao enderecos Tu C8", "rotulo": "p. 107", "url": "../100_p107_enderecos_tuC8.jpg"}, {"n": 101, "id": "1Z-4GrWW1b9CeBD4U8lnc878wxy8ep56v", "pagina": "108", "conteudo": "Relacao enderecos (final) + oracao serenidade", "rotulo": "p. 108", "url": "../101_p108_enderecos_oracao.jpg"}, {"n": 102, "id": "1XzlDaHYaKddsLi0I1NMYO78NfnODKfXu", "pagina": "201", "conteudo": "Anuncio S.Silva Imoveis", "rotulo": "p. 201", "url": "../102_p201_anuncio_ssilva.jpg"}, {"n": 103, "id": "1Ed6B6LmvEPl5f9WEXURHMPJd3eFmorQ-", "pagina": "ANUNCIO", "conteudo": "Anuncio Clark Equipamentos", "rotulo": "Anúncio", "url": "../103_anuncio_clark.jpg"}, {"n": 104, "id": "1kwhKFkITJD99nrrgTPokD43mI9dVBBHi", "pagina": "ANUNCIO", "conteudo": "Anuncio CESP energia", "rotulo": "Anúncio", "url": "../104_anuncio_cesp.jpg"}, {"n": 105, "id": "1-oNAnDek9xUmBV13vjZXs7fY5EIxGQRW", "pagina": "ANUNCIO", "conteudo": "Anuncios diversos (Tema Terra/Bendix/Sigla/Eletrometal)", "rotulo": "Anúncio", "url": "../105_anuncios_diversos.jpg"}, {"n": 106, "id": "1kcA1y8-0KeH3RpDX6lkO6uCL_RZpoSn7", "pagina": "RETRATO", "conteudo": "Retratos individuais (foto sem texto OCR)", "rotulo": "Galeria", "url": "../106_retratos_individuais.jpg"}, {"n": 107, "id": "1MUbbdixI76atl6CvLkmqn2lLQUtXAW6i", "pagina": "FOTO", "conteudo": "Identificar visualmente", "rotulo": "Galeria", "url": "../107_galeria_foto.jpg"}, {"n": 108, "id": "1-n70iOB0iuGDJ9hV6x8WhNSfAwGpmLM4", "pagina": "FOTO", "conteudo": "Identificar visualmente", "rotulo": "Galeria", "url": "../108_galeria_foto.jpg"}];
+let cur=0;
+const img=document.getElementById('img'),ph=document.getElementById('ph'),lbl=document.getElementById('lbl'),desc=document.getElementById('desc'),cNow=document.getElementById('cNow'),cTot=document.getElementById('cTot'),prev=document.getElementById('prev'),next=document.getElementById('next'),hint=document.getElementById('hint'),ov=document.getElementById('ov');
+cTot.textContent=PAGES.length;
+setTimeout(()=>hint.style.opacity='0',3000);
+function show(n){cur=Math.max(0,Math.min(PAGES.length-1,n));const p=PAGES[cur];ph.style.display='flex';img.className='loading';img.onload=()=>{ph.style.display='none';img.className='loaded';};img.onerror=()=>{ph.innerHTML='<div style="text-align:center;padding:20px;font-size:12px;opacity:.6">Imagem nao encontrada.</div>';};img.src=p.url;lbl.textContent=p.rotulo;desc.textContent=p.conteudo;cNow.textContent=cur+1;prev.disabled=cur===0;next.disabled=cur===PAGES.length-1;if(cur+1<PAGES.length){const pi=new Image();pi.src=PAGES[cur+1].url;}}
+prev.onclick=()=>show(cur-1);next.onclick=()=>show(cur+1);
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown')show(cur+1);if(e.key==='ArrowLeft'||e.key==='ArrowUp')show(cur-1);});
+let x0=null,y0=null;const fr=document.getElementById('frame');
+fr.addEventListener('touchstart',e=>{x0=e.touches[0].clientX;y0=e.touches[0].clientY;},{passive:true});
+fr.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;const dy=e.changedTouches[0].clientY-y0;if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40){if(dx<0)show(cur+1);else show(cur-1);}x0=y0=null;});
+document.getElementById('btnIdx').onclick=()=>{const list=document.getElementById('idxList');if(!list.children.length){PAGES.forEach((p,i)=>{const a=document.createElement('div');a.className='idx-item';a.innerHTML='<span class="idx-n">'+(i+1)+'</span><span class="idx-pg">'+p.rotulo+'</span><span class="idx-desc">'+p.conteudo+'</span>';a.onclick=()=>{show(i);ov.classList.remove('open');};list.appendChild(a);});}ov.classList.add('open');};
+document.getElementById('ovClose').onclick=()=>ov.classList.remove('open');
+show(0);
+</script>
 </body>
 </html>
