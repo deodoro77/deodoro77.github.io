@@ -14,7 +14,6 @@ function subEnc(btn,id){
   if(btn.classList.contains('locked'))return;
   btn.parentElement.querySelectorAll('.subnav-item').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  // só ev50 existe por ora
 }
 
 // ============ NÍVEL 3 (telas do evento 50 anos) ============
@@ -52,7 +51,6 @@ function doLogin(){
   alert('Bem-vindo, ' + info.nome + '!\n\nVocê está logado como integrante. A comunicação do site agora é personalizada com seu nome. (No protótipo isto é simulado; na versão final o login é validado contra o cadastro real da turma.)');
   nav('encontros');
   if(!window._inscBuilt){ buildInscricao(); window._inscBuilt=true; }
-  // reconstruir saudação se inscrição já montada
   refreshGreeting();
 }
 function refreshGreeting(){
@@ -71,6 +69,7 @@ function tick(){
   var d=Math.floor(diff/864e5),h=Math.floor(diff%864e5/36e5),m=Math.floor(diff%36e5/6e4),s=Math.floor(diff%6e4/1e3);
   var E=function(id){return document.getElementById(id)};
   if(E('cd-d')){E('cd-d').textContent=d;E('cd-h').textContent=String(h).padStart(2,'0');E('cd-m').textContent=String(m).padStart(2,'0');E('cd-s').textContent=String(s).padStart(2,'0');}
+  if(E('ebc-d')){E('ebc-d').textContent=d;E('ebc-h').textContent=String(h).padStart(2,'0');E('ebc-m').textContent=String(m).padStart(2,'0');E('ebc-s').textContent=String(s).padStart(2,'0');}
 }
 setInterval(tick,1000);tick();
 
@@ -95,7 +94,6 @@ function toggleBrinde(cb){
 function confirmBlock(btn){
   btn.closest('.form-card').classList.add('confirmed');
 }
-
 // ============ BUILD: INSCRIÇÃO ============
 function buildInscricao(){
   var nome = currentUser ? currentUser.nome : 'Aluno (faça login para personalizar)';
@@ -105,7 +103,6 @@ function buildInscricao(){
      <div class="gs">Bem-vindo, <span id="inscGreetName">${nome}</span> — confirme sua participação</div></div>
      <div class="gid"><div class="l">Status</div><div class="v">Não inscrito</div></div>
    </div>
-
    <div class="form-card">
      <div class="confirm-badge">Confirmado</div>
      <div class="fc-head"><div class="fc-num"><span>1</span></div>
@@ -121,7 +118,6 @@ function buildInscricao(){
      </div>
      <div class="block-confirm"><button class="bc-btn" onclick="confirmBlock(this)">Confirmar dados</button></div>
    </div>
-
    <div class="form-card">
      <div class="confirm-badge">Confirmado</div>
      <div class="fc-head"><div class="fc-num"><span>2</span></div>
@@ -137,12 +133,10 @@ function buildInscricao(){
        <div class="qp">Cortesia</div></div>
      <div class="block-confirm"><button class="bc-btn" onclick="confirmBlock(this)">Confirmar churrasco</button></div>
    </div>
-
    <div class="form-card">
      <div class="confirm-badge">Confirmado</div>
      <div class="fc-head"><div class="fc-num"><span>3</span></div>
        <div><h3>Brindes comemorativos</h3><div class="s">Opcionais — marque o que desejar e a quantidade</div></div></div>
-
      <div class="brinde-card">
        <div class="brinde-head" onclick="var c=this.querySelector('input');if(event.target!==c){c.checked=!c.checked;}toggleBrinde(this.querySelector('input'))">
          <input type="checkbox" onclick="event.stopPropagation();toggleBrinde(this)">
@@ -157,7 +151,6 @@ function buildInscricao(){
          <div class="size-sum" id="sizeSum">Total de camisetas: 0</div>
        </div>
      </div>
-
      <div class="brinde-card">
        <div class="brinde-head" onclick="var c=this.querySelector('input');if(event.target!==c){c.checked=!c.checked;}toggleBrinde(this.querySelector('input'))">
          <input type="checkbox" onclick="event.stopPropagation();toggleBrinde(this)">
@@ -167,7 +160,6 @@ function buildInscricao(){
        <div class="brinde-body"><div class="bb-grid"><span class="l">Quantidade</span>
          <div class="qty-input"><button onclick="qty(this,-1)">−</button><input value="1" data-k="med"><button onclick="qty(this,1)">+</button></div></div></div>
      </div>
-
      <div class="brinde-card">
        <div class="brinde-head" onclick="var c=this.querySelector('input');if(event.target!==c){c.checked=!c.checked;}toggleBrinde(this.querySelector('input'))">
          <input type="checkbox" onclick="event.stopPropagation();toggleBrinde(this)">
@@ -179,13 +171,11 @@ function buildInscricao(){
      </div>
      <div class="block-confirm"><button class="bc-btn" onclick="confirmBlock(this)">Confirmar brindes</button></div>
    </div>
-
    <div class="total-card">
      <div class="total-line sub"><span>Churrasco</span><span id="tChur">R$ 0,00</span></div>
      <div class="total-line sub"><span>Brindes</span><span id="tBri">R$ 0,00</span></div>
      <div class="total-line main"><span>Total da inscrição</span><span class="v" id="tTotal">R$ 0,00</span></div>
    </div>
-
    <div class="pay-card">
      <div class="fc-head"><div class="fc-num"><span>4</span></div>
        <div><h3>Pagamento</h3><div class="s">Via Pix — sem necessidade de comprovante</div></div></div>
@@ -206,7 +196,6 @@ function recalcInsc(){
   var ad=g('ad'),jo=g('jo'),med=0,liv=0;
   var chur=ad*180+jo*90;
   var camt=0;document.querySelectorAll('#sizesGrid input').forEach(i=>camt+=parseInt(i.value)||0);
-  // brindes só contam se card selecionado
   var bri=0;
   document.querySelectorAll('#inscContent .brinde-card').forEach(function(c){
     if(!c.classList.contains('selected'))return;
@@ -218,7 +207,6 @@ function recalcInsc(){
   var E=function(id){return document.getElementById(id)};
   if(E('tChur')){E('tChur').textContent=f(chur);E('tBri').textContent=f(bri);E('tTotal').textContent=f(chur+bri);}
 }
-
 // ============ BUILD: MINHA CONTA ============
 function buildConta(){
   var trat = currentUser ? currentUser.tratamento : 'companheiro';
@@ -229,12 +217,12 @@ function buildConta(){
      <p>Acompanhe e gerencie sua inscrição no Encontro de 50 Anos</p>
    </div>
    <div class="acct-card">
-     <h3>Dados cadastrais <span class="edit-link" onclick="alert('Na versão final, ao editar aqui, o cadastro da turma é atualizado automaticamente — e a comissão consegue gerar uma nova planilha Matriz já com a correção.')">✎ editar meus dados</span></h3>
+     <h3>Dados cadastrais <span class="edit-link" onclick="alert('Na versão final, ao editar aqui, o cadastro da turma é atualizado automaticamente.')">✎ editar meus dados</span></h3>
      <div class="summary-row"><span>Nome</span><span>${currentUser?currentUser.nome:'—'}</span></div>
      <div class="summary-row"><span>E-mail</span><span>—</span></div>
      <div class="summary-row"><span>Celular / WhatsApp</span><span>—</span></div>
      <div class="summary-row"><span>Cidade / UF</span><span>—</span></div>
-     <div class="sync-note">Quando você corrige um dado aqui, ele atualiza o <strong>cadastro central da turma</strong> automaticamente. Assim, a Matriz se mantém sempre correta — sem retrabalho.</div>
+     <div class="sync-note">Quando você corrige um dado aqui, ele atualiza o <strong>cadastro central da turma</strong> automaticamente.</div>
    </div>
    <div class="acct-card">
      <h3>Minha inscrição</h3>
@@ -254,17 +242,17 @@ function buildConta(){
          <span class="pill pending">Aguardando pagamento</span>
        </div>
      </div>
-     <div class="sync-note" style="margin-top:18px">O QR Code acima é <strong>individual</strong> e identifica seu pagamento automaticamente. Não é necessário enviar comprovante. <em>(No protótipo, o código é ilustrativo.)</em></div>
+     <div class="sync-note" style="margin-top:18px">O QR Code acima é <strong>individual</strong> e identifica seu pagamento automaticamente. Não é necessário enviar comprovante.</div>
    </div>
    <div class="actions-card">
      <h3>Alterar minha inscrição</h3>
      <div class="hs">Precisa mudar algo? Use uma das opções abaixo.</div>
      <div class="actions-grid">
-       <div class="action-btn add" onclick="alert('Aumentar adesão: gera um novo QR Code com a diferença a pagar. (Simulado)')">
+       <div class="action-btn add" onclick="alert('Aumentar adesão (simulado)')">
          <span class="ico">＋</span><span class="lab">Aumentar</span><span class="sub">incluir mais itens ou pessoas</span></div>
-       <div class="action-btn reduce" onclick="alert('Reduzir adesão: a comissão é avisada para acertar a devolução. (Simulado)')">
+       <div class="action-btn reduce" onclick="alert('Reduzir adesão (simulado)')">
          <span class="ico">－</span><span class="lab">Reduzir</span><span class="sub">remover itens da inscrição</span></div>
-       <div class="action-btn cancel" onclick="alert('Cancelar inscrição: registra o cancelamento e avisa a comissão. (Simulado)')">
+       <div class="action-btn cancel" onclick="alert('Cancelar inscrição (simulado)')">
          <span class="ico">✕</span><span class="lab">Cancelar</span><span class="sub">cancelar toda a inscrição</span></div>
      </div>
    </div>`;
@@ -275,7 +263,7 @@ function buildAdmin(){
   document.getElementById('adminContent').innerHTML = `
    <div class="admin-head">
      <div><h1>Administração · 50 Anos</h1><div class="s">Configurações do evento e cadastro da turma</div></div>
-     <button class="sv" onclick="alert('No protótipo as alterações não são salvas. Na versão final, tudo seria gravado e refletido no site e no cadastro.')">Salvar alterações</button>
+     <button class="sv" onclick="alert('No protótipo as alterações não são salvas.')">Salvar alterações</button>
    </div>
    <div class="admin-tabs">
      <button class="admin-tab active" onclick="adminTab(this,'precos')">Preços & Custos</button>
@@ -283,15 +271,14 @@ function buildAdmin(){
      <button class="admin-tab" onclick="adminTab(this,'cadastro')">Cadastro da turma</button>
      <button class="admin-tab" onclick="adminTab(this,'param')">Parâmetros</button>
    </div>
-
    <div class="admin-pane active" id="ap-precos">
      <div class="admin-grid">
-       <div class="admin-card"><h3>Bloco 1 · Churrasco</h3><div class="hs">Preço por pessoa (= custo)</div>
+       <div class="admin-card"><h3>Bloco 1 · Churrasco</h3><div class="hs">Preço por pessoa</div>
          <div class="item-row"><input value="Adulto (acima de 12)"><input class="price" value="180,00"><button class="del">×</button></div>
          <div class="item-row"><input value="Jovem (5 a 12)"><input class="price" value="90,00"><button class="del">×</button></div>
          <div class="item-row"><input value="Criança (até 4)"><input class="price" value="0,00"><button class="del">×</button></div>
          <button class="add-row">+ adicionar faixa</button></div>
-       <div class="admin-card"><h3>Bloco 2 · Brindes</h3><div class="hs">Itens opcionais (= custo)</div>
+       <div class="admin-card"><h3>Bloco 2 · Brindes</h3><div class="hs">Itens opcionais</div>
          <div class="item-row"><input value="Camiseta"><input class="price" value="80,00"><button class="del">×</button></div>
          <div class="item-row"><input value="Medalha 50 anos"><input class="price" value="120,00"><button class="del">×</button></div>
          <div class="item-row"><input value="Livro da Turma"><input class="price" value="150,00"><button class="del">×</button></div>
@@ -303,54 +290,47 @@ function buildAdmin(){
          <div class="item-row"><input value="Músicos"><input class="price" value="1.500,00"><button class="del">×</button></div>
          <button class="add-row">+ adicionar despesa</button></div>
      </div>
-     <div class="info-card"><h3>Patrocínio · cascata de aplicação</h3>
-       <div class="info-row"><label>1º Patrocínio (Poupex)</label><input value="R$ 5.000,00"></div>
-       <div class="info-row"><label>Aplicação 1</label><input value="Cobrir despesas comuns"></div>
-       <div class="info-row"><label>2º Patrocínio</label><input value="(a definir)"></div>
-       <div class="info-row"><label>Aplicação 2</label><input value="Subsidiar brinde mais barato"></div>
-       <div class="info-row"><label>Sobra mínima p/ subsídio</label><input value="(a definir pela comissão)"></div>
-     </div>
    </div>
-
    <div class="admin-pane" id="ap-banner">
      <div class="banner-config">
        <h3>Banner de evento na página inicial</h3>
-       <div class="hs" style="font-family:'Cormorant Garamond',serif;color:var(--muted);font-style:italic;margin:6px 0 0">Controle o destaque que aparece no topo da página inicial do site.</div>
        <div class="toggle-row">
          <div class="toggle on" id="bannerToggle" onclick="this.classList.toggle('on');document.getElementById('eventBanner').style.display=this.classList.contains('on')?'block':'none'"></div>
-         <div class="toggle-label">Exibir banner do evento<small>Quando ligado, aparece a chamada do evento ativo na página inicial, com link direto</small></div>
+         <div class="toggle-label">Exibir banner do evento<small>Quando ligado, aparece a chamada do evento ativo na página inicial</small></div>
        </div>
        <div class="info-row"><label>Evento destacado</label><input value="Encontro 50 Anos da Entrada · 1977–2027"></div>
-       <div class="info-row"><label>Texto da chamada</label><input value="Inscrições abertas — celebre meio século de história"></div>
-       <div class="info-row"><label>Botão leva para</label><input value="Encontros › 50 Anos › Apresentação"></div>
-       <div class="sync-note" style="margin-top:16px">Só deve haver banner quando há um evento ativo. Hoje é o caso (50 Anos). Quando o evento terminar, desligue aqui — a página inicial volta a ficar sem o destaque.</div>
+       <div class="info-row"><label>Data início</label><input value="26/02/2027"></div>
+       <div class="info-row"><label>Data término</label><input value="27/02/2027"></div>
      </div>
    </div>
-
    <div class="admin-pane" id="ap-cadastro">
      <div class="info-card" style="margin-bottom:20px;background:white;border-top:3px solid var(--gold)">
-       <h3>Cadastro da turma (derivado da Matriz)</h3>
-       <div style="font-family:'Cormorant Garamond',serif;color:var(--muted);font-style:italic;margin-bottom:16px">Este é o cadastro protegido que autoriza o login dos integrantes. Visível apenas para administradores. A amostra abaixo mostra a comissão (perfis de teste).</div>
+       <h3>Cadastro da turma</h3>
        <div class="cadastro-toolbar">
-         <input class="cad-search" placeholder="🔍 Buscar integrante por nome...">
-         <button class="cad-btn" onclick="alert('Na versão final: adicionar/editar integrante diretamente, refletindo no login e no site.')">+ Novo integrante</button>
-         <button class="cad-btn export" onclick="alert('Na versão final, este botão gera uma nova planilha Matriz (.xlsx) já com todas as atualizações feitas pelos integrantes e pela comissão — pronta para download.')">⬇ Exportar Matriz atualizada</button>
+         <input class="cad-search" placeholder="🔍 Buscar integrante...">
+         <button class="cad-btn">+ Novo integrante</button>
+         <button class="cad-btn export">⬇ Exportar Matriz</button>
        </div>
-       <table><thead><tr><th>#</th><th>Nome completo</th><th>E-mail</th><th>Telefone</th><th>Papel</th><th></th></tr></thead>
-       <tbody><tr><td class="al">001</td><td class="nm">Rivail Luiz Cerqueira</td><td>riva.cerqueira@gmail.com</td><td>(13) 99149-3334</td><td>Coordenador / Suporte</td><td><button class="cad-edit">Editar</button></td></tr><tr><td class="al">002</td><td class="nm">André Luis Novaes Miranda</td><td>andre.novaes63@gmail.com</td><td>(24) 99883-0314</td><td>Presidente</td><td><button class="cad-edit">Editar</button></td></tr><tr><td class="al">003</td><td class="nm">Luiz Augusto Baggio</td><td>baggio@exemplo.com</td><td>(19) 00787-2000</td><td>Vice-Presidente</td><td><button class="cad-edit">Editar</button></td></tr><tr><td class="al">004</td><td class="nm">Newton Raulino</td><td>newtonraulino@hotmail.com</td><td>(61) 98337-6000</td><td>Coordenador</td><td><button class="cad-edit">Editar</button></td></tr><tr><td class="al">005</td><td class="nm">Everton Cesar Seraphim</td><td>everton@exemplo.com</td><td>(19) 99918-6110</td><td>O Lig EsPCEx</td><td><button class="cad-edit">Editar</button></td></tr><tr><td class="al">006</td><td class="nm">Guy Hermínio Rocha</td><td>guy@exemplo.com</td><td>(19) 98969-6157</td><td>Cerimonial</td><td><button class="cad-edit">Editar</button></td></tr><tr><td class="al">007</td><td class="nm">Marco Elias dos Santos</td><td>m.e.santos@uol.com.br</td><td>(12) 99782-1346</td><td>Brindes</td><td><button class="cad-edit">Editar</button></td></tr><tr><td class="al">008</td><td class="nm">Marcílio Pereira de Oliveira</td><td>marcilio.pereira.oliveira@gmail.com</td><td>(21) 7980-2873</td><td>Mídias</td><td><button class="cad-edit">Editar</button></td></tr></tbody></table>
-       <div class="sync-note" style="margin-top:16px">Quando um integrante corrige os próprios dados em "Minha Conta", a alteração aparece aqui automaticamente. A comissão pode então exportar uma Matriz sempre atualizada — fechando o ciclo entre site e planilha.</div>
+       <table><thead><tr><th>#</th><th>Nome</th><th>E-mail</th><th>Telefone</th><th>Papel</th><th></th></tr></thead>
+       <tbody>
+         <tr><td class="al">001</td><td class="nm">Rivail Luiz Cerqueira</td><td>riva.cerqueira@gmail.com</td><td>(13) 99149-3334</td><td>Coordenador</td><td><button class="cad-edit">Editar</button></td></tr>
+         <tr><td class="al">002</td><td class="nm">André Luis Novaes Miranda</td><td>andre.novaes63@gmail.com</td><td>(24) 99883-0314</td><td>Presidente</td><td><button class="cad-edit">Editar</button></td></tr>
+         <tr><td class="al">003</td><td class="nm">Luiz Augusto Baggio</td><td>baggio@exemplo.com</td><td>(19) 00787-2000</td><td>Vice-Presidente</td><td><button class="cad-edit">Editar</button></td></tr>
+         <tr><td class="al">004</td><td class="nm">Newton Raulino</td><td>newtonraulino@hotmail.com</td><td>(61) 98337-6000</td><td>Coordenador</td><td><button class="cad-edit">Editar</button></td></tr>
+         <tr><td class="al">005</td><td class="nm">Everton Cesar Seraphim</td><td>everton@exemplo.com</td><td>(19) 99918-6110</td><td>O Lig EsPCEx</td><td><button class="cad-edit">Editar</button></td></tr>
+         <tr><td class="al">006</td><td class="nm">Guy Hermínio Rocha</td><td>guy@exemplo.com</td><td>(19) 98969-6157</td><td>Cerimonial</td><td><button class="cad-edit">Editar</button></td></tr>
+         <tr><td class="al">007</td><td class="nm">Marco Elias dos Santos</td><td>m.e.santos@uol.com.br</td><td>(12) 99782-1346</td><td>Brindes</td><td><button class="cad-edit">Editar</button></td></tr>
+         <tr><td class="al">008</td><td class="nm">Marcílio Pereira de Oliveira</td><td>marcilio.pereira.oliveira@gmail.com</td><td>(21) 7980-2873</td><td>Mídias</td><td><button class="cad-edit">Editar</button></td></tr>
+       </tbody></table>
      </div>
    </div>
-
    <div class="admin-pane" id="ap-param">
      <div class="info-card"><h3>Parâmetros do evento</h3>
        <div class="info-row"><label>Data início</label><input value="26/02/2027"></div>
        <div class="info-row"><label>Data término</label><input value="27/02/2027"></div>
-       <div class="info-row"><label>Hora pré-encontro</label><input value="20:00"></div>
        <div class="info-row"><label>Local</label><input value="EsPCEx · Campinas/SP"></div>
-       <div class="info-row"><label>Limite de inscrições</label><input value="05/01/2027"></div>
-       <div class="info-row"><label>Limite retardatários</label><input value="05/02/2027"></div>
-       <div class="info-row"><label>Total de integrantes</label><input value="256"></div>
+       <div class="info-row"><label>Limite inscrições</label><input value="05/01/2027"></div>
+       <div class="info-row"><label>Total integrantes</label><input value="256"></div>
      </div>
    </div>`;
 }
@@ -360,7 +340,6 @@ function adminTab(btn,id){
   document.querySelectorAll('.admin-pane').forEach(p=>p.classList.remove('active'));
   document.getElementById('ap-'+id).classList.add('active');
 }
-
 // ============ BUILD: DASHBOARD ============
 function buildDash(){
   document.getElementById('dashContent').innerHTML = `
@@ -417,5 +396,5 @@ function buildDash(){
        </div>
      </div>
    </div>
-   <div class="sync-note" style="max-width:none;margin-top:6px">Como os preços cobrados são iguais aos custos, o saldo reflete essencialmente <strong>Patrocínio − Despesas Comuns</strong>. Com mais patrocínio, o saldo fecha positivo. <em>(Números ilustrativos no protótipo.)</em></div>`;
+   <div class="sync-note" style="max-width:none;margin-top:6px">Como os preços cobrados são iguais aos custos, o saldo reflete essencialmente <strong>Patrocínio − Despesas Comuns</strong>. Com mais patrocínio, o saldo fecha positivo.</div>`;
 }
