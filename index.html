@@ -68,25 +68,27 @@
 }
 .cancao-letra .letra-body {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.15rem;
-  line-height: 2;
-  color: var(--fg, #e8e4d8);
+  font-size: 1.2rem;
+  line-height: 2.1;
+  color: #f0ece0;
   text-align: center;
   white-space: pre-line;
 }
 .cancao-letra .letra-estrofe {
   margin-bottom: 28px;
+  color: #f0ece0;
 }
 .cancao-letra .letra-refrão {
   margin-bottom: 28px;
   font-style: italic;
-  color: var(--gold, #C8A84B);
+  color: #C8A84B;
+  font-size: 1.22rem;
 }
 .cancao-nota {
   margin-top: 32px;
   text-align: center;
   font-size: 0.78rem;
-  color: var(--muted, #8a8a7a);
+  color: #a0a090;
   letter-spacing: 0.05em;
 }
 .cancao-ornament {
@@ -161,10 +163,7 @@
 #hinoFloat:hover #hinoLabel {
   color: rgba(200,168,75,1);
 }
-/* iframe oculto para áudio flutuante */
-#hinoAudioFrame {
-  display: none;
-}
+
 </style>
 </head>
 <body>
@@ -511,7 +510,7 @@ Com seu garbo marcial.</div>
   </div>
 </section>
 
-<div class="help-bar">★ Protótipo · Site da Turma · navegue pelo menu</div>
+
 
 <!-- ===== ÍCONE FLUTUANTE DO HINO ===== -->
 <div id="hinoFloat" title="Ouvir a Canção da EsPCEx">
@@ -520,39 +519,36 @@ Com seu garbo marcial.</div>
   </button>
   <span id="hinoLabel">Canção</span>
 </div>
-<!-- iframe oculto para reprodução de áudio em background -->
-<iframe id="hinoAudioFrame" src="" allow="autoplay" title="Canção da EsPCEx - áudio"></iframe>
-
 <script src="assets/js/script.js"></script>
 <script>
-// ===== NOSSA CANÇÃO — nav =====
-// Adiciona 'cancao' ao roteador existente
-(function(){
-  const origNav = window.nav;
-  window.nav = function(id) {
-    origNav(id);
-  };
-})();
-
 // ===== ÍCONE FLUTUANTE DO HINO =====
+// Abre o YouTube em janela pequena — único método confiável sem bloqueio de autoplay
+var hinoWin = null;
 var hinoPlaying = false;
-var hinoFrame = document.getElementById('hinoAudioFrame');
 var hinoBtnFloat = document.getElementById('hinoBtnFloat');
-var hinoLabel = document.getElementById('hinoLabel');
+var hinoLabel    = document.getElementById('hinoLabel');
 
-// URL de embed com autoplay para áudio de fundo
-var HINO_URL_PLAY  = 'https://www.youtube.com/embed/6G58bDr_t5Y?autoplay=1&loop=1&playlist=6G58bDr_t5Y&rel=0&modestbranding=1';
-var HINO_URL_PAUSE = '';
+var HINO_YT = 'https://www.youtube.com/watch?v=6G58bDr_t5Y';
 
 function toggleHino() {
   if (!hinoPlaying) {
-    hinoFrame.src = HINO_URL_PLAY;
+    // Abre janela pequena no canto — o aluno pode minimizá-la
+    var w = 360, h = 220;
+    var left = window.screen.width  - w - 20;
+    var top  = window.screen.height - h - 60;
+    hinoWin = window.open(
+      HINO_YT,
+      'hinoEsPCEx',
+      'width='+w+',height='+h+',left='+left+',top='+top+
+      ',toolbar=no,menubar=no,location=no,status=no,resizable=yes,scrollbars=no'
+    );
     hinoPlaying = true;
     hinoBtnFloat.classList.add('playing');
     hinoBtnFloat.innerHTML = '❚❚';
-    hinoLabel.textContent = 'Pausar';
+    hinoLabel.textContent = 'Fechar';
   } else {
-    hinoFrame.src = HINO_URL_PAUSE;
+    if (hinoWin && !hinoWin.closed) hinoWin.close();
+    hinoWin = null;
     hinoPlaying = false;
     hinoBtnFloat.classList.remove('playing');
     hinoBtnFloat.innerHTML = '♪';
@@ -560,10 +556,21 @@ function toggleHino() {
   }
 }
 
-// Ao entrar na aba Nossa Canção, para o áudio flutuante para não sobrepor
+// Se o aluno fechar a janela manualmente, reseta o botão
+setInterval(function(){
+  if (hinoPlaying && hinoWin && hinoWin.closed) {
+    hinoWin = null;
+    hinoPlaying = false;
+    hinoBtnFloat.classList.remove('playing');
+    hinoBtnFloat.innerHTML = '♪';
+    hinoLabel.textContent = 'Canção';
+  }
+}, 1000);
+
+// Ao entrar na aba Nossa Canção, fecha a janelinha para não sobrepor
 document.querySelectorAll('[data-nav="cancao"]').forEach(function(btn){
   btn.addEventListener('click', function(){
-    if(hinoPlaying) toggleHino();
+    if (hinoPlaying) toggleHino();
   });
 });
 </script>
