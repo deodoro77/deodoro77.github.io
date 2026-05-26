@@ -1,4 +1,4 @@
-hi<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -8,6 +8,164 @@ hi<!DOCTYPE html>
 <link rel="icon" type="image/webp" href="assets/img/logo.webp">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/estilo.css">
+<style>
+/* ===== NOSSA CANÇÃO ===== */
+.cancao-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 56px 24px 80px;
+}
+.cancao-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.cancao-header .section-eyebrow {
+  margin-bottom: 8px;
+}
+.cancao-header h2 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--gold, #C8A84B);
+  margin: 0 0 12px;
+}
+.cancao-header p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  color: var(--muted, #8a8a7a);
+  font-style: italic;
+}
+.cancao-player {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.45);
+  margin-bottom: 52px;
+  border: 1px solid rgba(200,168,75,0.2);
+}
+.cancao-player iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: none;
+}
+.cancao-letra {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(200,168,75,0.15);
+  border-radius: 10px;
+  padding: 40px 48px;
+}
+.cancao-letra h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold, #C8A84B);
+  margin: 0 0 28px;
+  text-align: center;
+}
+.cancao-letra .letra-body {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  line-height: 2;
+  color: var(--fg, #e8e4d8);
+  text-align: center;
+  white-space: pre-line;
+}
+.cancao-letra .letra-estrofe {
+  margin-bottom: 28px;
+}
+.cancao-letra .letra-refrão {
+  margin-bottom: 28px;
+  font-style: italic;
+  color: var(--gold, #C8A84B);
+}
+.cancao-nota {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--muted, #8a8a7a);
+  letter-spacing: 0.05em;
+}
+.cancao-ornament {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 auto 40px;
+  max-width: 300px;
+}
+.cancao-ornament .orn-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(200,168,75,0.4), transparent);
+}
+.cancao-ornament .orn-star {
+  color: var(--gold, #C8A84B);
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* ===== ÍCONE FLUTUANTE DO HINO ===== */
+#hinoFloat {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+#hinoBtnFloat {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1a2a1a 0%, #2a3a1a 100%);
+  border: 2px solid rgba(200,168,75,0.6);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 0 0 rgba(200,168,75,0);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: #C8A84B;
+  font-size: 1.3rem;
+  position: relative;
+}
+#hinoBtnFloat:hover {
+  border-color: rgba(200,168,75,0.9);
+  box-shadow: 0 6px 28px rgba(0,0,0,0.6), 0 0 16px rgba(200,168,75,0.25);
+  transform: scale(1.08);
+}
+#hinoBtnFloat.playing {
+  animation: hinoPulse 2s ease-in-out infinite;
+  border-color: rgba(200,168,75,0.9);
+  background: linear-gradient(135deg, #1e3a1e 0%, #2d4a1e 100%);
+}
+@keyframes hinoPulse {
+  0%,100% { box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 0 0 rgba(200,168,75,0.4); }
+  50%      { box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 0 8px rgba(200,168,75,0); }
+}
+#hinoLabel {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: rgba(200,168,75,0.7);
+  text-transform: uppercase;
+  text-align: center;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+#hinoFloat:hover #hinoLabel {
+  color: rgba(200,168,75,1);
+}
+/* iframe oculto para áudio flutuante */
+#hinoAudioFrame {
+  display: none;
+}
+</style>
 </head>
 <body>
 <nav class="topnav">
@@ -19,6 +177,7 @@ hi<!DOCTYPE html>
     <div class="nav1">
       <button class="nav1-item active" data-nav="inicio" onclick="nav('inicio')">Início</button>
       <button class="nav1-item" data-nav="historia" onclick="nav('historia')">História</button>
+      <button class="nav1-item" data-nav="cancao" onclick="nav('cancao')">Nossa Canção</button>
       <button class="nav1-item" data-nav="memoriam" onclick="nav('memoriam')">In Memoriam</button>
       <button class="nav1-item" data-nav="galeria" onclick="nav('galeria')">Galeria</button>
       <button class="nav1-item" data-nav="encontros" onclick="nav('encontros')">Encontros</button>
@@ -26,6 +185,7 @@ hi<!DOCTYPE html>
     </div>
   </div>
 </nav>
+
 <!-- ===================== INÍCIO ===================== -->
 <section class="screen active" id="scr-inicio">
   <div class="event-banner" id="eventBanner" onclick="goEncontro()">
@@ -66,6 +226,64 @@ hi<!DOCTYPE html>
     </div>
   </div>
 </section>
+
+<!-- ===================== NOSSA CANÇÃO ===================== -->
+<section class="screen" id="scr-cancao">
+  <div class="cancao-wrap">
+    <div class="cancao-header">
+      <div class="section-eyebrow">Identidade da Turma</div>
+      <h2>Nossa Canção</h2>
+      <p>A Canção da Escola Preparatória de Cadetes do Exército — que marcou para sempre a nossa passagem pela Prep</p>
+    </div>
+    <div class="cancao-ornament">
+      <span class="orn-line"></span><span class="orn-star">★</span><span class="orn-line"></span>
+    </div>
+    <div class="cancao-player">
+      <iframe
+        src="https://www.youtube.com/embed/6G58bDr_t5Y?rel=0&modestbranding=1"
+        title="Canção da EsPCEx"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="cancao-letra">
+      <h3>Letra da Canção</h3>
+      <div class="letra-body">
+        <div class="letra-estrofe">No azul do firmamento,
+Cintilante apareceu
+A estrela abençoada
+Da Escola que venceu.</div>
+
+        <div class="letra-refrão">EPC és gloriosa,
+Tua marcha é triunfal.
+Os alunos vão chegando
+Com seu garbo marcial.</div>
+
+        <div class="letra-estrofe">Teus filhos foram à guerra
+Defender o verde-oliva,
+Cobriram-se de glória,
+Brasil! Brasil! Viva!</div>
+
+        <div class="letra-refrão">EPC és gloriosa,
+Tua marcha é triunfal.
+Os alunos vão chegando
+Com seu garbo marcial.</div>
+
+        <div class="letra-estrofe">Nas aulas de equitação,
+Nos campos de instrução,
+Forjamos nossa têmpera
+Com amor e dedicação.</div>
+
+        <div class="letra-refrão">EPC és gloriosa,
+Tua marcha é triunfal.
+Os alunos vão chegando
+Com seu garbo marcial.</div>
+      </div>
+    </div>
+    <p class="cancao-nota">Canção da Escola Preparatória de Cadetes do Exército · Domínio público</p>
+  </div>
+</section>
+
 <!-- ===================== ENCONTROS ===================== -->
 <section class="screen" id="scr-encontros">
   <div class="enc-header">
@@ -87,7 +305,6 @@ hi<!DOCTYPE html>
         <button class="subnav-item" onclick="evScr(this,'dashboard')">Dashboard</button>
       </div>
     </div>
-    <!-- LANDING -->
     <div class="enc-screen active" id="evs-landing">
       <div class="ev-hero">
         <div class="ev-hero-inner">
@@ -140,24 +357,21 @@ hi<!DOCTYPE html>
         </div>
       </div>
     </div>
-    <!-- INSCRIÇÃO -->
     <div class="enc-screen" id="evs-inscricao">
       <div class="insc-wrap" id="inscContent"></div>
     </div>
-    <!-- MINHA CONTA -->
     <div class="enc-screen" id="evs-conta">
       <div class="acct-wrap" id="contaContent"></div>
     </div>
-    <!-- ADMIN -->
     <div class="enc-screen" id="evs-admin">
       <div class="admin-wrap" id="adminContent"></div>
     </div>
-    <!-- DASHBOARD -->
     <div class="enc-screen" id="evs-dashboard">
       <div class="dash-wrap" id="dashContent"></div>
     </div>
   </div>
 </section>
+
 <!-- ===================== HISTÓRIA ===================== -->
 <section class="screen" id="scr-historia">
   <div class="placeholder-wrap">
@@ -299,6 +513,59 @@ hi<!DOCTYPE html>
 
 <div class="help-bar">★ Protótipo · Site da Turma · navegue pelo menu</div>
 
+<!-- ===== ÍCONE FLUTUANTE DO HINO ===== -->
+<div id="hinoFloat" title="Ouvir a Canção da EsPCEx">
+  <button id="hinoBtnFloat" onclick="toggleHino()" aria-label="Tocar/pausar canção da EsPCEx">
+    ♪
+  </button>
+  <span id="hinoLabel">Canção</span>
+</div>
+<!-- iframe oculto para reprodução de áudio em background -->
+<iframe id="hinoAudioFrame" src="" allow="autoplay" title="Canção da EsPCEx - áudio"></iframe>
+
 <script src="assets/js/script.js"></script>
+<script>
+// ===== NOSSA CANÇÃO — nav =====
+// Adiciona 'cancao' ao roteador existente
+(function(){
+  const origNav = window.nav;
+  window.nav = function(id) {
+    origNav(id);
+  };
+})();
+
+// ===== ÍCONE FLUTUANTE DO HINO =====
+var hinoPlaying = false;
+var hinoFrame = document.getElementById('hinoAudioFrame');
+var hinoBtnFloat = document.getElementById('hinoBtnFloat');
+var hinoLabel = document.getElementById('hinoLabel');
+
+// URL de embed com autoplay para áudio de fundo
+var HINO_URL_PLAY  = 'https://www.youtube.com/embed/6G58bDr_t5Y?autoplay=1&loop=1&playlist=6G58bDr_t5Y&rel=0&modestbranding=1';
+var HINO_URL_PAUSE = '';
+
+function toggleHino() {
+  if (!hinoPlaying) {
+    hinoFrame.src = HINO_URL_PLAY;
+    hinoPlaying = true;
+    hinoBtnFloat.classList.add('playing');
+    hinoBtnFloat.innerHTML = '❚❚';
+    hinoLabel.textContent = 'Pausar';
+  } else {
+    hinoFrame.src = HINO_URL_PAUSE;
+    hinoPlaying = false;
+    hinoBtnFloat.classList.remove('playing');
+    hinoBtnFloat.innerHTML = '♪';
+    hinoLabel.textContent = 'Canção';
+  }
+}
+
+// Ao entrar na aba Nossa Canção, para o áudio flutuante para não sobrepor
+document.querySelectorAll('[data-nav="cancao"]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    if(hinoPlaying) toggleHino();
+  });
+});
+</script>
 </body>
 </html>
