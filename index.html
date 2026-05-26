@@ -519,36 +519,61 @@ Com seu garbo marcial.</div>
   </button>
   <span id="hinoLabel">Canção</span>
 </div>
+<!-- Player oculto para áudio flutuante via YouTube IFrame API -->
+<div id="hinoPlayerWrap" style="position:fixed;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;bottom:0;right:0;">
+  <div id="hinoYTPlayer"></div>
+</div>
+
 <script src="assets/js/script.js"></script>
 <script>
-// ===== ÍCONE FLUTUANTE DO HINO =====
-// Abre o YouTube em janela pequena — único método confiável sem bloqueio de autoplay
-var hinoWin = null;
+// ===== YOUTUBE IFRAME API — áudio flutuante =====
+var hinoReady   = false;
 var hinoPlaying = false;
+var ytPlayer    = null;
 var hinoBtnFloat = document.getElementById('hinoBtnFloat');
 var hinoLabel    = document.getElementById('hinoLabel');
 
-var HINO_YT = 'https://www.youtube.com/watch?v=6G58bDr_t5Y';
+// Carrega a API do YouTube de forma assíncrona
+var tag = document.createElement('script');
+tag.src = 'https://www.youtube.com/iframe_api';
+document.head.appendChild(tag);
+
+// Callback chamado pela API quando pronta
+window.onYouTubeIframeAPIReady = function() {
+  ytPlayer = new YT.Player('hinoYTPlayer', {
+    videoId: '6G58bDr_t5Y',
+    playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: '6G58bDr_t5Y' },
+    events: {
+      onReady: function() { hinoReady = true; },
+      onStateChange: function(e) {
+        // Se o vídeo terminar (estado ENDED), reinicia
+        if (e.data === YT.PlayerState.ENDED) ytPlayer.playVideo();
+        // Sincroniza botão se pausado externamente
+        if (e.data === YT.PlayerState.PAUSED && hinoPlaying) {
+          hinoPlaying = false;
+          hinoBtnFloat.classList.remove('playing');
+          hinoBtnFloat.innerHTML = '♪';
+          hinoLabel.textContent = 'Canção';
+        }
+      }
+    }
+  });
+};
 
 function toggleHino() {
+  if (!hinoReady) {
+    hinoLabel.textContent = 'Aguarde...';
+    setTimeout(toggleHino, 600);
+    return;
+  }
   if (!hinoPlaying) {
-    // Abre janela pequena no canto — o aluno pode minimizá-la
-    var w = 360, h = 220;
-    var left = window.screen.width  - w - 20;
-    var top  = window.screen.height - h - 60;
-    hinoWin = window.open(
-      HINO_YT,
-      'hinoEsPCEx',
-      'width='+w+',height='+h+',left='+left+',top='+top+
-      ',toolbar=no,menubar=no,location=no,status=no,resizable=yes,scrollbars=no'
-    );
+    ytPlayer.playVideo();
     hinoPlaying = true;
     hinoBtnFloat.classList.add('playing');
     hinoBtnFloat.innerHTML = '❚❚';
-    hinoLabel.textContent = 'Fechar';
+    hinoLabel.textContent = 'Pausar';
   } else {
-    if (hinoWin && !hinoWin.closed) hinoWin.close();
-    hinoWin = null;
+    ytPlayer.pauseVideo();
     hinoPlaying = false;
     hinoBtnFloat.classList.remove('playing');
     hinoBtnFloat.innerHTML = '♪';
@@ -556,18 +581,7 @@ function toggleHino() {
   }
 }
 
-// Se o aluno fechar a janela manualmente, reseta o botão
-setInterval(function(){
-  if (hinoPlaying && hinoWin && hinoWin.closed) {
-    hinoWin = null;
-    hinoPlaying = false;
-    hinoBtnFloat.classList.remove('playing');
-    hinoBtnFloat.innerHTML = '♪';
-    hinoLabel.textContent = 'Canção';
-  }
-}, 1000);
-
-// Ao entrar na aba Nossa Canção, fecha a janelinha para não sobrepor
+// Ao entrar na aba Nossa Canção, pausa o flutuante para não sobrepor
 document.querySelectorAll('[data-nav="cancao"]').forEach(function(btn){
   btn.addEventListener('click', function(){
     if (hinoPlaying) toggleHino();
