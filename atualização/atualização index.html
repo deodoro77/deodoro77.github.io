@@ -151,7 +151,7 @@ html,body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-seri
   <div class="cad-intro">
     <div class="eyebrow">Encontro 2027 · Nosso cadastro</div>
     <h1>Atualização do cadastro da turma</h1>
-    <p>Companheiro, encontre seu nome abaixo e confirme ou corrija seus dados de contato. Leva menos de dois minutos — e nos ajuda a reencontrar toda a turma.</p>
+    <p>Aluno, encontre seu nome abaixo e confirme ou corrija seus dados de contato. Leva menos de dois minutos — e nos ajuda a reencontrar toda a turma.</p>
   </div>
 
   <!-- ETAPA 1 -->
@@ -187,7 +187,8 @@ html,body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-seri
       </div>
       <div class="cad-field">
         <label for="f_cia">Companhia</label>
-        <input type="text" id="f_cia">
+        <input type="text" id="f_cia" maxlength="1" inputmode="numeric" placeholder="1, 2 ou 3">
+        <span class="note">Digite apenas o número da sua companhia (1, 2 ou 3).</span>
       </div>
     </div>
 
@@ -195,11 +196,11 @@ html,body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-seri
     <div class="cad-field-grid">
       <div class="cad-field">
         <label for="f_email">E-mail principal</label>
-        <input type="email" id="f_email">
+        <input type="email" id="f_email" style="text-transform:lowercase">
       </div>
       <div class="cad-field">
         <label for="f_email_alt">E-mail alternativo</label>
-        <input type="email" id="f_email_alt">
+        <input type="email" id="f_email_alt" style="text-transform:lowercase">
       </div>
       <div class="cad-field">
         <label for="f_tel_fixo">Telefone fixo</label>
@@ -211,7 +212,7 @@ html,body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-seri
       </div>
       <div class="cad-field">
         <label for="f_cidade">Cidade</label>
-        <input type="text" id="f_cidade">
+        <input type="text" id="f_cidade" style="text-transform:uppercase">
       </div>
       <div class="cad-field">
         <label for="f_uf">UF</label>
@@ -229,7 +230,7 @@ html,body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-seri
   <div class="cad-card cad-hidden" id="successCard">
     <div class="cad-success">
       <div class="check">✓</div>
-      <h2>Recebido, companheiro!</h2>
+      <h2>Recebido, camarada!</h2>
       <p id="successName"></p>
       <p style="margin-top:16px">Seus dados foram registrados. Obrigado por manter nossa turma unida.</p>
     </div>
@@ -315,7 +316,7 @@ function preencher(a){
   document.getElementById('f_token').value=a.token||'';
   document.getElementById('f_nome').value=a.nome||'';
   document.getElementById('f_nr').value=a.nr||'';
-  document.getElementById('f_cia').value=a.cia||'';
+  document.getElementById('f_cia').value=(a.cia||'').toString().replace(/[^123]/g,'');
   document.getElementById('f_email').value=a.email||'';
   document.getElementById('f_email_alt').value=a.email_alt||'';
   document.getElementById('f_tel_fixo').value=a.tel_fixo||'';
@@ -347,14 +348,14 @@ document.getElementById('submitBtn').addEventListener('click', function(){
   btn.disabled=true; btn.innerHTML='<span class="cad-spinner"></span>Enviando...'; elFormMsg.innerHTML='';
   var dados={
     token:document.getElementById('f_token').value,
-    nr:document.getElementById('f_nr').value,
-    cia:document.getElementById('f_cia').value,
+    nr:document.getElementById('f_nr').value.trim(),
+    cia:(function(c){c=document.getElementById('f_cia').value.trim();return /^[123]$/.test(c)?c+'ª':c;})(),
     nome:nome,
-    email:document.getElementById('f_email').value.trim(),
-    email_alt:document.getElementById('f_email_alt').value.trim(),
+    email:document.getElementById('f_email').value.trim().toLowerCase(),
+    email_alt:document.getElementById('f_email_alt').value.trim().toLowerCase(),
     tel_fixo:document.getElementById('f_tel_fixo').value.trim(),
     celular:document.getElementById('f_celular').value.trim(),
-    cidade:document.getElementById('f_cidade').value.trim(),
+    cidade:document.getElementById('f_cidade').value.trim().toUpperCase(),
     uf:document.getElementById('f_uf').value.trim().toUpperCase()
   };
   var body=Object.keys(dados).map(function(k){return encodeURIComponent(k)+'='+encodeURIComponent(dados[k]);}).join('&');
