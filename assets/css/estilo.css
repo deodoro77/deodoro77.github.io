@@ -457,3 +457,29 @@ html,body{overflow-x:hidden;}
   .section-title{ font-size:clamp(22px,6vw,32px); }
   .section-text{ font-size:clamp(16px,4.2vw,20px); }
 }
+/* ============================================
+   CORREÇÃO RESPONSIVA — DASHBOARD (colar no final do estilo.css)
+   Trata os grids de colunas fixas que estouram no celular
+   ============================================ */
+@media (max-width:880px){
+  /* KPIs: de 4 colunas para 2 */
+  .kpis{grid-template-columns:repeat(2,1fr)!important;}
+  /* Tamanhos de camiseta: de 7 colunas para 4 */
+  .sizes-dash{grid-template-columns:repeat(4,1fr)!important;}
+  /* Status: de 5 colunas para 3 */
+  .status-grid{grid-template-columns:repeat(3,1fr)!important;}
+  /* Efetivo: de 3 colunas para 2 */
+  .efetivo-grid{grid-template-columns:repeat(2,1fr)!important;}
+  /* Cabeçalho da dashboard empilha */
+  .dash-head{flex-direction:column;align-items:flex-start;}
+}
+@media (max-width:520px){
+  /* Em telas bem estreitas, KPIs e status viram 2 colunas; camiseta 3 */
+  .kpis,.status-grid{grid-template-columns:repeat(2,1fr)!important;}
+  .sizes-dash{grid-template-columns:repeat(3,1fr)!important;}
+  .efetivo-grid{grid-template-columns:1fr 1fr!important;}
+  .kpi .v{font-size:24px;}
+  .dash-head h1{font-size:clamp(22px,6vw,28px);}
+}
+/* Tabelas largas (admin/cadastro) rolam lateralmente em vez de estourar */
+.admin-pane table,.panel table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap;}
