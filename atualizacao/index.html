@@ -181,6 +181,11 @@ html,body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-seri
         <input type="text" id="f_nome">
         <span class="note">Escreva com todos os acentos e sinais gráficos (ç, ã, é, ô, ...). Eles serão preservados.</span>
       </div>
+      <div class="cad-field full">
+        <label for="f_nome_guerra">Nome de guerra</label>
+        <input type="text" id="f_nome_guerra" style="text-transform:uppercase">
+        <span class="note">Obrigatório.</span>
+      </div>
       <div class="cad-field">
         <label for="f_nr">Nº de aluno</label>
         <input type="text" id="f_nr">
@@ -197,10 +202,6 @@ html,body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-seri
       <div class="cad-field">
         <label for="f_email">E-mail principal</label>
         <input type="email" id="f_email" style="text-transform:lowercase">
-      </div>
-      <div class="cad-field">
-        <label for="f_email_alt">E-mail alternativo</label>
-        <input type="email" id="f_email_alt" style="text-transform:lowercase">
       </div>
       <div class="cad-field">
         <label for="f_tel_fixo">Telefone fixo</label>
@@ -315,10 +316,10 @@ function escolher(token){
 function preencher(a){
   document.getElementById('f_token').value=a.token||'';
   document.getElementById('f_nome').value=a.nome||'';
+  document.getElementById('f_nome_guerra').value=a.nome_guerra||'';
   document.getElementById('f_nr').value=a.nr||'';
   document.getElementById('f_cia').value=(a.cia||'').toString().replace(/[^123]/g,'');
   document.getElementById('f_email').value=a.email||'';
-  document.getElementById('f_email_alt').value=a.email_alt||'';
   document.getElementById('f_tel_fixo').value=a.tel_fixo||'';
   document.getElementById('f_celular').value=a.celular||'';
   document.getElementById('f_cidade').value=a.cidade||'';
@@ -331,7 +332,7 @@ function preencher(a){
 }
 
 document.getElementById('notFoundBtn').addEventListener('click', function(){
-  preencher({token:'NOVO',nome:'',nr:'',cia:'',email:'',email_alt:'',tel_fixo:'',celular:'',cidade:'',uf:''});
+  preencher({token:'NOVO',nome:'',nome_guerra:'',nr:'',cia:'',email:'',tel_fixo:'',celular:'',cidade:'',uf:''});
   elFormWho.textContent='Novo cadastro';
 });
 
@@ -344,15 +345,17 @@ document.getElementById('backBtn').addEventListener('click', function(){
 document.getElementById('submitBtn').addEventListener('click', function(){
   var btn=this;
   var nome=document.getElementById('f_nome').value.trim();
+  var nomeGuerra=document.getElementById('f_nome_guerra').value.trim();
   if(!nome){elFormMsg.innerHTML='<div class="cad-msg cad-msg-err">Por favor, preencha ao menos o nome.</div>';return;}
+  if(!nomeGuerra){elFormMsg.innerHTML='<div class="cad-msg cad-msg-err">O nome de guerra é obrigatório.</div>';document.getElementById('f_nome_guerra').focus();return;}
   btn.disabled=true; btn.innerHTML='<span class="cad-spinner"></span>Enviando...'; elFormMsg.innerHTML='';
   var dados={
     token:document.getElementById('f_token').value,
     nr:document.getElementById('f_nr').value.trim(),
     cia:(function(c){c=document.getElementById('f_cia').value.trim();return /^[123]$/.test(c)?c+'ª':c;})(),
     nome:nome,
+    nome_guerra:nomeGuerra.toUpperCase(),
     email:document.getElementById('f_email').value.trim().toLowerCase(),
-    email_alt:document.getElementById('f_email_alt').value.trim().toLowerCase(),
     tel_fixo:document.getElementById('f_tel_fixo').value.trim(),
     celular:document.getElementById('f_celular').value.trim(),
     cidade:document.getElementById('f_cidade').value.trim().toUpperCase(),
