@@ -53,12 +53,12 @@ html,body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-seri
 .cad-intro{text-align:center;margin-bottom:38px}
 .cad-intro .eyebrow{font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-deep);margin-bottom:10px}
 .cad-intro h1{font-family:'Cinzel',serif;font-size:clamp(1.6rem,4vw,2.3rem);color:var(--jungle);margin-bottom:14px;line-height:1.2}
-.cad-intro p{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--muted);font-style:italic;max-width:580px;margin:0 auto}
+.cad-intro p{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--ink);font-style:italic;max-width:580px;margin:0 auto}
 
 .cad-card{background:white;border:1px solid var(--line);border-radius:4px;padding:34px;box-shadow:var(--shadow-soft);margin-bottom:22px}
 
 .search-label{font-family:'Cinzel',serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--jungle);margin-bottom:8px;display:block}
-.search-hint{font-size:13px;color:var(--muted);margin-bottom:14px;font-style:italic}
+.search-hint{font-size:13px;color:var(--ink);margin-bottom:14px;font-style:italic;opacity:.85}
 .search-box{position:relative}
 #nameSearch{width:100%;font-family:'Inter',sans-serif;font-size:15px;padding:13px 15px;border:1px solid var(--line);border-radius:3px;background:var(--ivory-soft);transition:all .2s}
 #nameSearch:focus{outline:none;border-color:var(--gold);background:white;box-shadow:0 0 0 3px rgba(200,165,88,.15)}
@@ -68,10 +68,11 @@ html,body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-seri
 .suggestions li:last-child{border-bottom:none}
 .suggestions li:hover,.suggestions li.active{background:var(--ivory-soft);color:var(--jungle)}
 .suggestions li .nr{font-size:11px;color:var(--muted);white-space:nowrap}
-.notfound{margin-top:16px;font-size:13px;color:var(--muted);text-align:center}
+.notfound{margin-top:16px;font-size:13px;color:var(--ink);text-align:center}
 .notfound button{background:none;border:none;color:var(--gold-deep);text-decoration:underline;cursor:pointer;font-size:13px;font-family:inherit}
 
 .form-head{display:flex;align-items:center;gap:12px;margin-bottom:8px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.cad-instruction{background:#fbf0d9;border:1px solid var(--gold-line);border-radius:3px;padding:12px 16px;font-size:14px;color:var(--ink);margin-bottom:22px}
 .form-head .who{font-family:'Cinzel',serif;font-size:17px;color:var(--jungle);letter-spacing:1px}
 .section-mini{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-deep);margin:26px 0 12px}
 .cad-field-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -98,7 +99,7 @@ html,body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-seri
 .cad-success{text-align:center;padding:44px 20px}
 .cad-success .check{width:66px;height:66px;border-radius:50%;background:var(--ok,#2d6a39);color:white;font-size:34px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px}
 .cad-success h2{font-family:'Cinzel',serif;color:var(--jungle);margin-bottom:12px}
-.cad-success p{color:var(--muted);font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic}
+.cad-success p{color:var(--ink);font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic}
 
 @media (max-width:560px){
   .cad-field-grid{grid-template-columns:1fr}
@@ -151,13 +152,13 @@ html,body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-seri
   <div class="cad-intro">
     <div class="eyebrow">Encontro 2027 · Nosso cadastro</div>
     <h1>Atualização do cadastro da turma</h1>
-    <p>Aluno, encontre seu nome abaixo e confirme ou corrija seus dados de contato. Leva menos de dois minutos — e nos ajuda a reencontrar toda a turma.</p>
+    <p>Primeiro, encontre seu nome na lista abaixo. Em seguida, revise cada campo, corrija o que estiver errado, preencha seu nome de guerra, e clique em "Confirmar meus dados" para concluir.</p>
   </div>
 
   <!-- ETAPA 1 -->
   <div class="cad-card" id="searchCard">
     <label class="search-label" for="nameSearch">Comece digitando seu nome</label>
-    <p class="search-hint">Digite as primeiras letras e escolha seu nome na lista.</p>
+    <p class="search-hint">Digite as primeiras letras do seu nome — isso abrirá seus dados para revisão.</p>
     <div class="search-box">
       <input type="text" id="nameSearch" autocomplete="off" placeholder="Ex.: ANTÔNIO, JOSÉ, LUIZ...">
       <ul class="suggestions" id="suggestions"></ul>
@@ -171,6 +172,7 @@ html,body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-seri
   <div class="cad-card cad-hidden" id="formCard">
     <div id="formMsg"></div>
     <div class="form-head"><div class="who" id="formWho"></div></div>
+    <div class="cad-instruction">📋 Revise os campos abaixo, um a um. Ao terminar, role até o fim e clique em <strong>Confirmar meus dados</strong>.</div>
 
     <input type="hidden" id="f_token">
 
